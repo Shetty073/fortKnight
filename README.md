@@ -11,4 +11,5 @@
 ### Why did you create this?
 *so that there would be less fight between the players regarding where to go/land* 😉
 
+### How does it work?
 ![Bot in Action](https://i.imgur.com/HJEEjqB.png)
