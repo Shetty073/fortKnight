@@ -13,3 +13,7 @@
 
 ### How does it work?
 ![Bot in Action](https://i.imgur.com/HJEEjqB.png)
+
+### New command added:
+##### .st - *gives the status of fortnite servers*
+##### ![Bot in action](https://i.imgur.com/o3Msw3X.png)
