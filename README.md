@@ -17,3 +17,6 @@
 ### New command added:
 ##### .st - *gives the status of fortnite servers*
 ##### ![Bot in action](https://i.imgur.com/o3Msw3X.png)
+
+
+Ignore the file named "Procfile".
