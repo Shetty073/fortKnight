@@ -76,8 +76,8 @@ async def ask(what):
 		await bot.say(".st: Get the latest fortnite server status")
 		await bot.say(".list: Gives you the list of all available weapons along with rarity")
 		await bot.say(".wd: Gives all details of the specified weapon \nTo use this command type .wd \"name of the weapon\" and \"rarity of the weapon\" and press enter")
-		await bot.say("New features incoming....till then enjoy!")
+		await bot.say("This is a Work In Progress. New features/improvements incoming....till then enjoy!")
 	elif what == "wd":
-		await bot.say("Example of .wd command: \n.wd Scar epic => gives the information on \"epic Scar\" \nIf the name of the weapon is made up of two words the use \"\" inverted comas to write it.\nFor example .wd \"Scoped Rifle\" rare\nIf you need any more assistance contact AlphaSierra")
+		await bot.say("How to use the .wd command: \n.wd Scar epic => gives the information on \"epic Scar\" \nIf the name of the weapon is made up of two words the use \"\" inverted comas to write it.\nFor example .wd \"Scoped Rifle\" rare\nIf you need any more assistance contact AlphaSierra")
 
 bot.run("secret goes here")
