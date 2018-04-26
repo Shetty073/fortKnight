@@ -47,7 +47,7 @@ async def list():
 	await bot.say(weapon_list)
 
 #weapon details code starts here
-@bot.command(pass_context=True)
+@bot.command()
 async def wd(nameOfWeapon, rarityOfTheWeapon):
 	read = req.get("https://www.fortnitechests.info/api/weapons")
 	rawData = read.json()
