@@ -48,11 +48,9 @@ async def list():
 
 #weapon details code starts here
 @bot.command(pass_context=True)
-async def wd():
+async def wd(nameOfWeapon, rarityOfTheWeapon):
 	read = req.get("https://www.fortnitechests.info/api/weapons")
 	rawData = read.json()
-	nameOfWeapon = input("Weapon Name: ")
-	rarityOfTheWeapon = input("Weapon rarity: ")
 	for i in rawData:
 		if i["name"] == nameOfWeapon and i["rarity"] == rarityOfTheWeapon:
 			await bot.say("Weapon Type:", i["type"])
