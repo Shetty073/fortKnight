@@ -53,18 +53,20 @@ async def wd(nameOfWeapon, rarityOfTheWeapon):
 	rawData = read.json()
 	for i in rawData:
 		if i["name"] == nameOfWeapon and i["rarity"] == rarityOfTheWeapon:
-			await bot.say("Weapon Type:", i["type"])
-			await bot.say("Weapon Rarity:", i["rarity"])
-			await bot.say("Weapon Damage:", i["damage"])
-			await bot.say("Weapon Headshot Damage:", i["headshotdamage"])
-			await bot.say("Weapon Damage per Second:", i["dps"])
-			await bot.say("Weapon Rate of Fire:", i["firerate"])
-			await bot.say("Weapon Magazine Size:", i["magsize"])
-			await bot.say("Weapon Range:", i["range"])
-			await bot.say("Weapon Durability:", i["durability"])
-			await bot.say("Weapon Reloadtime:", i["reloadtime"])
-			await bot.say("Weapon Ammocost:", i["ammocost"])
-			await bot.say("Weapon Impact:", i["impact"])
+			weaponType = "Weapon Type:", i["type"]
+			weaponRarity = "Weapon Rarity:", i["rarity"]
+			weaponDamage = "Weapon Damage:", i["damage"]
+			weaponHeadDamage = "Weapon Headshot Damage:", i["headshotdamage"]
+			weaponDpS = "Weapon Damage per Second:", i["dps"]
+			weaponRoF = "Weapon Rate of Fire:", i["firerate"]
+			weaponMagSize = "Weapon Magazine Size:", i["magsize"]
+			weaponRange = "Weapon Range:", i["range"]
+			weaponDurable = "Weapon Durability:", i["durability"]
+			weaponReload = "Weapon Reloadtime:", i["reloadtime"]
+			weaponAmmocost = "Weapon Ammocost:", i["ammocost"]
+			weaponImpact = "Weapon Impact:", i["impact"]
+			final = weaponType + weaponRarity + weaponDamage + weaponHeadDamage + weaponDpS + weaponRoF + weaponMagSize + weaponRange + weaponDurable + weaponReload + weaponAmmocost + weaponImpact
+			await bot.say(final)
 			break
 
 @bot.command(pass_context=True)
