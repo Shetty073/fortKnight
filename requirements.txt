@@ -4,3 +4,4 @@ websockets
 chardet
 requests
 beautifulsoup4
+string
