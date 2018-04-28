@@ -1,4 +1,5 @@
 #Fortknight-bot by Shetty073
+#version: 1.1
 
 import discord
 from discord.ext import commands
