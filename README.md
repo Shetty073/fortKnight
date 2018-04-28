@@ -12,6 +12,7 @@
 ### How does it work?
 ![Bot in Action](https://i.imgur.com/HJEEjqB.png)
 
+<br/><br/><br/><br/>
 
 ### Requirements
 * Python 3.5.x or newer
@@ -28,8 +29,9 @@
 * Close the commandline to make the bot go offline
 * For help on discord bot account and invitation refer [this](https://github.com/Chikachi/DiscordIntegration/wiki/How-to-get-a-token-and-channel-ID-for-Discord)*
 
+<br/><br/><br/><br/>
 
-## Imporvements
+## Imporvements:
 
 ### New command added:
 ##### `.st` - *gives the status of fortnite servers*
