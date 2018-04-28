@@ -1,4 +1,4 @@
-#Fortknight-bot by Shetty073
+#Fortknight-bot by Shetty073/AlphaSierra
 #version: 1.1
 
 import discord
