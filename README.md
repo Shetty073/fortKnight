@@ -24,11 +24,11 @@
 * `git clone` or download this project as .zip
 * Extract and open the file "fortKnight.py" in a code/text editor
 * In the last line `bot.run("secret goes here")` replace the text `secret goes here` with your discord app token
-  *Above step is important as the token is bots password and without it the bot will not log in and will be unusable
+  * Above step is important as the token is bots password and without it the bot will not log in and will be unusable
 * Once done save and close the file
-* Open commandline go to the folder where "fortKnight.py" is located then type and enter `python fortKnight.py`(python3 for Linux) to run this bot
+* Open commandline go to the folder where "fortKnight.py" is located then type and enter `python fortKnight.py`(python3 for Linux users) to run this bot
 * Close the commandline to make the bot go offline
-*For help on discord bot account and invitation refer [this](https://github.com/Chikachi/DiscordIntegration/wiki/How-to-get-a-token-and-channel-ID-for-Discord)*
+* For help on discord bot account and invitation refer [this](https://github.com/Chikachi/DiscordIntegration/wiki/How-to-get-a-token-and-channel-ID-for-Discord)*
 
 ### New command added:
 ##### `.st` - *gives the status of fortnite servers*
