@@ -1,15 +1,13 @@
 # fortKnight-bot
 
 ### What is this?
-*A random location chooser bot for [Fortnite Battle Royale](https://www.epicgames.com/fortnite/en-US/buy-now/battle-royale) players on discord* 
-### What does this do?
-*It chooses a random location on battle royale map for players to land on*
+*A discord bot for [Fortnite Battle Royale](https://www.epicgames.com/fortnite/en-US/buy-now/battle-royale) players* 
 
 ### How to use this?
-*You can deploy this and run from your pc with all the requirements completed ofcourse*
+*You can deploy this and run from your pc. See "requirements" and "How to run?" sections for more details*
 
 ### Why did you create this?
-*so that there would be less fight between the players regarding where to go/land* 😉
+*So that there would be less fight between the players regarding where to go/land 😉. Just kidding, I created this because I like python and wanted to write a bot*
 
 ### How does it work?
 ![Bot in Action](https://i.imgur.com/HJEEjqB.png)
@@ -30,22 +28,25 @@
 * Close the commandline to make the bot go offline
 * For help on discord bot account and invitation refer [this](https://github.com/Chikachi/DiscordIntegration/wiki/How-to-get-a-token-and-channel-ID-for-Discord)*
 
+
+## Imporvements
+
 ### New command added:
 ##### `.st` - *gives the status of fortnite servers*
 ##### ![Bot in action](https://i.imgur.com/o3Msw3X.png)
 
-## Version 1.0
-### Features:
+### Version 1.0
+#### Features:
 * `.ft` - Shows a random location on battle royale map for players to land on
 * `.st` - Shows the status of Fortnite Battle Royale Servers
 
-## Version 1.1
-### Features:
+### Version 1.1
+#### Features:
 * `.ask` - Help menu added (has problems)
 * `.list` - Shows the list of in-game shootable wespons along with their respective rarity
 * `.wd` - Provides the details of weapons (Use: .wd "name of the wespon" "rarity")
 
-### What next?
+#### What next?
 * Major improvements/fixes (help menu and .wd result format)
 * New features
 
