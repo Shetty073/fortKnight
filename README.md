@@ -7,7 +7,7 @@
 *You can deploy this and run from your pc. See "requirements" and "How to run?" sections for more details*
 
 ### Why did you create this?
-*So that there would be less fight between the players regarding where to go/land 😉. Just kidding, I created this because I like python and wanted to write a bot*
+*So that there would be less fight between the players regarding where to go/land 😉. Just kidding, I created this because I like python and always wanted to write a bot*
 
 ### How does it work?
 ![Bot in Action](https://i.imgur.com/HJEEjqB.png)
