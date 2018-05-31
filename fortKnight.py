@@ -22,11 +22,12 @@ update = "UP"
 weapon_st = "Following is a list of all the \"available weapons\" in the game along with their \"rarity\"::"
 weapon_list = " Scar: legendary, epic \n Scoped Rifle: epic, rare \n M4: rare, uncommon, common \n Burst Rifle: uncommon, common, rare \n Bolt-Action Sniper: epic, legendary, rare \n Auto Sniper: legendary, epic \n Crossbow: rare, epic \n Hunting Rifle: rare, uncommon \n Pump Shotgun: rare, uncommon \n Heavy Shotgun: epic, legendary \n Tactical Shotgun: common, uncommon, rare \n Minigun: legendary, epic \n Tactical Submachine Gun: epic, rare, uncommon \n Silenced SMG: common, uncommon, rare \n Silenced Pistol: legendary, epic \n Hand Cannon: epic, legendary \n Pistol: rare, uncommon, common \n Revolver: common, uncommon, rare \n Rocket Launcher: legendary, epic, rare \n Guided Missile: epic, legendary \n Grenade Launcher: rare, epic, legendary \n Grenade: common \n Light Machine Gun: epic, rare"
 
-bot = commands.Bot(command_prefix='.')
+bot = Bot(command_prefix='.')
 
 @bot.event
 async def on_ready():
 	print("Let the battle begin")
+	await bot.change_presence(game=discord.Game(name='.ask for help'))
 
 @bot.command(pass_context=True)
 async def ft():
@@ -80,5 +81,6 @@ async def ask(what):
 		await bot.say("This is a Work In Progress. New features/improvements incoming....till then enjoy!")
 	elif what == "wd":
 		await bot.say("How to use the .wd command: \n.wd Scar epic => gives the information on \"epic Scar\" \nIf the name of the weapon is made up of two words the use \"\" inverted comas to write it.\nFor example .wd \"Scoped Rifle\" rare\nIf you need any more assistance contact AlphaSierra")
+
 
 bot.run("secret goes here")
