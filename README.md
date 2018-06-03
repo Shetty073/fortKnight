@@ -16,8 +16,7 @@
 
 ### Requirements
 * Python 3.5.x or newer
-* discord.py 0.16.6 or newer
-* & other modules as listed in requirements.txt
+* Important ones are discord.py and python-twitter (you can check requirements.txt)
 
 ### How to run?
 * `git clone` or download this project as .zip
@@ -28,29 +27,16 @@
 * Open commandline go to the folder where "fortKnight.py" is located then type and enter `python fortKnight.py`(python3 for Linux users) to run this bot
 * Close the commandline to make the bot go offline
 * For help on discord bot account and invitation refer [this](https://github.com/Chikachi/DiscordIntegration/wiki/How-to-get-a-token-and-channel-ID-for-Discord)*
+* Since this bot is revamped and work is being done from a fresh start you will need a free [twitter app account](https://apps.twitter.com/) so that you can get the four needed keys for the new tweet function to work
 
 <br/><br/><br/><br/>
 
-## Imporvements:
+### Commands
+`.ft` - This will geta random fortnite game location name for the players to decide to jump to
+`.toss` - Toss a coin
+`.roll` - Roll a die
+`.tweet` - Grab the last three tweets by Fortnite's [official twitter](https://twitter.com/FortniteGame)
 
-### New command added:
-##### `.st` - *gives the status of fortnite servers*
-##### ![Bot in action](https://i.imgur.com/o3Msw3X.png)
-
-### Version 1.0
-#### Features:
-* `.ft` - Shows a random location on battle royale map for players to land on
-* `.st` - Shows the status of Fortnite Battle Royale Servers
-
-### Version 1.1
-#### Features:
-* `.ask` - Help menu added (has problems)
-* `.list` - Shows the list of in-game shootable wespons along with their respective rarity
-* `.wd` - Provides the details of weapons (Use: .wd "name of the wespon" "rarity")
-
-#### What next?
-* Major improvements/fixes (help menu and .wd result format)
-* New features
 
 
 Ignore the file named "Procfile" it is not required to run the bot from local machine.
