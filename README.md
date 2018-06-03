@@ -32,10 +32,10 @@
 <br/><br/><br/><br/>
 
 ### Commands
-`.ft` - This will geta random fortnite game location name for the players to decide to jump to
-`.toss` - Toss a coin
-`.roll` - Roll a die
-`.tweet` - Grab the last three tweets by Fortnite's [official twitter](https://twitter.com/FortniteGame)
+* `.ft` - This will geta random fortnite game location name for the players to decide to jump to
+* `.toss` - Toss a coin
+* `.roll` - Roll a die
+* `.tweet` - Grab the last three tweets by Fortnite's [official twitter](https://twitter.com/FortniteGame)
 
 
 
