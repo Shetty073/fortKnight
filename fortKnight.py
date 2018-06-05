@@ -40,6 +40,32 @@ async def roll():
 	rolled = random.choice(dice)
 	await bot.say("You have rolled a " + rolled)
 
+# .rps play rock, paper, scissor with the bot
+@bot.command()
+async def rps(playerChoice):
+	frtnight = ["rock", "paper", "scissor"]
+	botChoice = random.choice(frtnight)
+	playerChoice = playerChoice.lower()
+	if botChoice == playerChoice:
+		await bot.say("You said " + playerChoice + " and I said " + botChoice + "\n" + "Its a tie!")
+	elif botChoice == "rock" and playerChoice == "paper":
+		await bot.say("You said paper and I said rock." + "\n" + "You won! I lost!")
+	elif botChoice == "rock" and playerChoice == "scissor":
+		await bot.say("You said scissor and I said rock." + "\n" + "I won! You lost! haha")
+	elif botChoice == "paper" and playerChoice == "rock":
+		await bot.say("You said rock and I said paper." + "\n" + "I won! You lost! haha")
+	elif botChoice == "paper" and playerChoice == "scissor":
+		await bot.say("You said scissor and I said paper." + "\n" + "You won! I lost!")
+	elif botChoice == "scissor" and playerChoice == "paper":
+		await bot.say("You said paper and I said scissor." + "\n" + "You won! I loose!")
+	elif botChoice == "scissor" and playerChoice == "rock":
+		await bot.say("You said rock and I said scissor." + "\n" + "You won! I lost!")
+
+# .gn say good night to bot
+@bot.command()
+async def gn():
+	await bot.say("Good Night" + "\n" + ":fist: :sweat_drops:")
+
 # .tweet gets the (three) latest tweets by Fortnite
 api = twitter.Api(consumer_key = 'consumer_key_here',
                   consumer_secret = 'consumer_secret_here',
@@ -54,23 +80,30 @@ async def tweet():
 		bird = t['text']
 		await bot.say(bird)
 
+# Get player data
+@bot.command()
+async def st(username):
+	api_url = "https://fortnite.y3n.co/v2/player/{0}".format(username) #epicusername
+	headers = {'User-Agent': 'nodejs request', 'X-Key': 'API-KEY-HERE'}
+	response = req.get(api_url, headers = headers)
+	data_acquired = json.loads(response.content.decode("utf-8"))
+	await bot.say(data_acquired)
+#TODO
+#clean and beautify the json output into readable format
+
+
 #Help menu
 ft = "`.ft`"
 toss = "`.toss`"
 roll = "`.roll`"
 tweet = "`.tweet`"
-help_menu = ft + ":    Random location chooser, gives a randomly choosen location to jump" + "\n\n" + toss + ": Tosses a coin for you" + "\n\n" + roll + ": Rolls a die for you" + "\n\n" + tweet + ": Displays the last three tweets by Fortnite's official handle"
+rps = "`.rps`"
+gn = "`.gn`"
+st = "`.st`"
+help_menu = ft + ":    Random location chooser, gives a randomly choosen location to jump" + "\n\n" + toss + ": Tosses a coin for you" + "\n\n" + roll + ": Rolls a die for you" + "\n\n" + tweet + ": Displays the last three tweets by Fortnite's official handle" + "\n\n" + rps + ": Play Rock, Paper and Scissor" + "\n" + "Usage: " + "`.rps rock`" + "\n\n" + gn + ": Say Good Night to bot" + "\n\n" + st + ": Get player data" + "\n" + "Usage: " + "`.st \"epic username\"`"
 @bot.command(pass_context = True)
 async def ask():
 	await bot.say(help_menu)
-
-#TODO
-#Get player data
-#@bot.command(pass_context = True)
-#async def player(nickname):
-#	data = req.get("https://api.fortnitetracker.com/v1/profile/{platform}/{epic-nickname}", headers={"Api-Key": "API-KEY-HERE"})
-
-
 
 
 bot.run("discord_secret_goes_here")
