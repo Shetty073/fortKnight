@@ -10,12 +10,19 @@
 *So that there would be less fight between the players regarding where to go/land 😉. Just kidding, I created this because I like python and always wanted to write a bot*
 
 ### How does it work?
+##### Just '.ask' for help 😉
 ![Help Menu](https://i.imgur.com/bkmpzVX.png)
+##### The random location list command
 ![ft command](https://i.imgur.com/c7q7Wzg.png)
+##### Toss a coin
 ![toss a coin](https://i.imgur.com/fisjA1v.png)
+##### Roll a die
 ![roll a die](https://i.imgur.com/l2NkgK4.png)
+##### Get latest tweets from [FortniteGame](https://twitter.com/FortniteGame)
 ![tweet's from Fortnite official](https://i.imgur.com/r9uHLLP.png)
+##### Bored waiting for a member to leave a squad, play Rock, Paper, Scissor with the bot
 ![rps game command](https://i.imgur.com/Vn1g9cp.png)
+##### Say Good Night to the bot He will appreciate it 😂
 ![gn to bot](https://i.imgur.com/px5od8Y.png)
 
 <br/><br/><br/><br/>
