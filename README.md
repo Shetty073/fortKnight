@@ -10,7 +10,13 @@
 *So that there would be less fight between the players regarding where to go/land 😉. Just kidding, I created this because I like python and always wanted to write a bot*
 
 ### How does it work?
-![Bot in Action](https://i.imgur.com/HJEEjqB.png)
+![Help Menu](https://i.imgur.com/bkmpzVX.png)
+![ft command](https://i.imgur.com/c7q7Wzg.png)
+![toss a coin](https://i.imgur.com/fisjA1v.png)
+![roll a die](https://i.imgur.com/l2NkgK4.png)
+![tweet's from Fortnite official](https://i.imgur.com/r9uHLLP.png)
+![rps game command](https://i.imgur.com/Vn1g9cp.png)
+![gn to bot](https://i.imgur.com/px5od8Y.png)
 
 <br/><br/><br/><br/>
 
