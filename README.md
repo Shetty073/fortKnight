@@ -20,7 +20,7 @@
 ![roll a die](https://i.imgur.com/l2NkgK4.png)
 ##### Get latest tweets from [FortniteGame](https://twitter.com/FortniteGame)
 ![tweet's from Fortnite official](https://i.imgur.com/r9uHLLP.png)
-##### Bored waiting for a member to leave a squad, play Rock, Paper, Scissor with the bot
+##### Bored waiting for a member to leave a squad, play Rock, Paper, Scissor with the bot till then
 ![rps game command](https://i.imgur.com/Vn1g9cp.png)
 ##### Say Good Night to the bot He will appreciate it 😂
 ![gn to bot](https://i.imgur.com/px5od8Y.png)
