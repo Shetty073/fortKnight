@@ -40,9 +40,6 @@
 * `.rps` - Play rock, paper, scissor with the bot
 * `gn` - Say good night to the bot
 * `st` - Get the fortnite player data. Usage: `.st "epic_username"`
-=======
-
->>>>>>> 2009be64b4a0ec7efab9cec4bd271a8534b7d2cf
 
 
 Ignore the file named "Procfile" it is not required to run the bot from local machine.
