@@ -10,13 +10,38 @@
 *So that there would be less fight between the players regarding where to go/land 😉. Just kidding, I created this because I like python and always wanted to write a bot*
 
 ### How does it work?
-![Bot in Action](https://i.imgur.com/HJEEjqB.png)
+##### Just '.ask' for help 😉
+![Help Menu](https://i.imgur.com/bkmpzVX.png)
+##### The random location list command
+![ft command](https://i.imgur.com/c7q7Wzg.png)
+##### Toss a coin
+![toss a coin](https://i.imgur.com/fisjA1v.png)
+##### Roll a die
+![roll a die](https://i.imgur.com/l2NkgK4.png)
+##### Get latest tweets from [FortniteGame](https://twitter.com/FortniteGame)
+![tweet's from Fortnite official](https://i.imgur.com/r9uHLLP.png)
+##### Bored waiting for a member to leave a squad, play Rock, Paper, Scissor with the bot till then
+![rps game command](https://i.imgur.com/Vn1g9cp.png)
+##### Say Good Night to the bot He will appreciate it 😂
+![gn to bot](https://i.imgur.com/px5od8Y.png)
 
-<br/><br/><br/><br/>
+### Commands
+* `.ft` - This will geta random fortnite game location name for the players to decide to jump to
+* `.toss` - Toss a coin
+* `.roll` - Roll a die
+* `.tweet` - Grab the last three tweets by Fortnite's [official twitter](https://twitter.com/FortniteGame)
+<<<<<<< HEAD
+* `.rps` - Play rock, paper, scissor with the bot
+* `gn` - Say good night to the bot
+* `st` - Get the fortnite player data. Usage: `.st "epic_username"`
+
+<br/><br/>
 
 ### Requirements
 * Python 3.5.x or newer
 * Important ones are discord.py and python-twitter (you can check requirements.txt)
+
+<br/><br/><br/><br/>
 
 ### How to run?
 * `git clone` or download this project as .zip
@@ -30,20 +55,6 @@
 * Since this bot is revamped and work is being done from a fresh start you will need a free [twitter app account](https://apps.twitter.com/) so that you can get the four needed keys for the new tweet function to work
 
 <br/><br/><br/><br/>
-
-### Commands
-* `.ft` - This will geta random fortnite game location name for the players to decide to jump to
-* `.toss` - Toss a coin
-* `.roll` - Roll a die
-* `.tweet` - Grab the last three tweets by Fortnite's [official twitter](https://twitter.com/FortniteGame)
-<<<<<<< HEAD
-* `.rps` - Play rock, paper, scissor with the bot
-* `gn` - Say good night to the bot
-* `st` - Get the fortnite player data. Usage: `.st "epic_username"`
-=======
-
->>>>>>> 2009be64b4a0ec7efab9cec4bd271a8534b7d2cf
-
 
 Ignore the file named "Procfile" it is not required to run the bot from local machine.
 
