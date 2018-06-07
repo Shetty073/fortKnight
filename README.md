@@ -24,6 +24,8 @@
 ![rps game command](https://i.imgur.com/Vn1g9cp.png)
 ##### Say Good Night to the bot He will appreciate it 😂
 ![gn to bot](https://i.imgur.com/px5od8Y.png)
+##### Get player statistics like total wins, last match played, etc
+![.st command](https://i.imgur.com/phh8VEK.png)
 
 ### Commands
 * `.ft` - This will geta random fortnite game location name for the players to decide to jump to
@@ -33,7 +35,12 @@
 <<<<<<< HEAD
 * `.rps` - Play rock, paper, scissor with the bot
 * `gn` - Say good night to the bot
-* `st` - Get the fortnite player data. Usage: `.st "epic_username"`
+* `st` - Get the fortnite player data. Usage: `.st "epic_username"` Version 1.0
+
+### Version:
+
+## 1.0:
+* '.st' command added with other improvements
 
 <br/><br/>
 
