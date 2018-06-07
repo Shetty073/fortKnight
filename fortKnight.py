@@ -90,7 +90,7 @@ async def tweet():
 
 # Get player data
 @bot.command()
-async def st(username):
+async def st(*,username):# Using * symbol our command can accept a username which consists of more than one word
 	api_url = f"https://fortnite.y3n.co/v2/player/{username}"
 	headers = {'User-Agent': 'nodejs request', 'X-Key': 'API-KEY-HERE'}
 	response = req.get(api_url, headers = headers)
