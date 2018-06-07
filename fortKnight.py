@@ -230,9 +230,19 @@ async def shp():
 	dl_item5_url = dl_item5['imgURL']
 	dl_item6_url = dl_item6['imgURL']
 
-	bold_shopitm = "__**Today's shop items are**__"
-	shop_out = bold_shopitm + ":" + wk_item1_url + "\n" + wk_item2_url + "\n" + dl_item1_url + "\n" + dl_item2_url + "\n" + dl_item3_url + "\n" + dl_item4_url + "\n" + dl_item5_url + "\n" + dl_item6_url + "\n"
-	await bot.say(shop_out)
+#	bold_shopitm = "__**Today's shop items are**__" THIS METHOD HAS EMBEDDING ISSUES AS 8 IMAGES ARE THERE
+#	shop_out = bold_shopitm + ":" + wk_item1_url + "\n" + wk_item2_url + "\n" + dl_item1_url + "\n" + dl_item2_url + "\n" + dl_item3_url + "\n" + dl_item4_url + "\n" + dl_item5_url + "\n" + dl_item6_url + "\n"
+#	await bot.say(shop_out)
+
+	await bot.say("__**Today's shop items are**__")
+	await bot.say(wk_item1_url)
+	await bot.say(wk_item2_url)
+	await bot.say(dl_item1_url)
+	await bot.say(dl_item2_url)
+	await bot.say(dl_item3_url)
+	await bot.say(dl_item4_url)
+	await bot.say(dl_item5_url)
+	await bot.say(dl_item6_url)
 
 
 #Help menu
