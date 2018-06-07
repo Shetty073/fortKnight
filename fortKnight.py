@@ -54,19 +54,19 @@ async def rps(playerChoice):
 	botChoice = random.choice(frtnight)
 	playerChoice = playerChoice.lower()
 	if botChoice == playerChoice:
-		await bot.say("You said " + playerChoice + " and I said " + botChoice + "\n" + "Its a tie!")
+		await bot.say("You said " + playerChoice + " and the Bot said " + botChoice + "\n" + "Its a tie!")
 	elif botChoice == "rock" and playerChoice == "paper":
-		await bot.say("You said paper and I said rock." + "\n" + "You won! I lost!")
+		await bot.say("You said paper and the Bot said rock." + "\n" + "You won! the Bot lost!")
 	elif botChoice == "rock" and playerChoice == "scissor":
-		await bot.say("You said scissor and I said rock." + "\n" + "I won! You lost! haha")
+		await bot.say("You said scissor and the Bot said rock." + "\n" + "the Bot won! You lost! haha")
 	elif botChoice == "paper" and playerChoice == "rock":
-		await bot.say("You said rock and I said paper." + "\n" + "I won! You lost! haha")
+		await bot.say("You said rock and the Bot said paper." + "\n" + "the Bot won! You lost! haha")
 	elif botChoice == "paper" and playerChoice == "scissor":
-		await bot.say("You said scissor and I said paper." + "\n" + "You won! I lost!")
+		await bot.say("You said scissor and the Bot said paper." + "\n" + "You won! the Bot lost!")
 	elif botChoice == "scissor" and playerChoice == "paper":
-		await bot.say("You said paper and I said scissor." + "\n" + "You won! I loose!")
+		await bot.say("You said paper and the Bot said scissor." + "\n" + "You won! the Bot loose!")
 	elif botChoice == "scissor" and playerChoice == "rock":
-		await bot.say("You said rock and I said scissor." + "\n" + "You won! I lost!")
+		await bot.say("You said rock and the Bot said scissor." + "\n" + "You won! the Bot lost!")
 
 # .gn say good night to bot
 @bot.command()
@@ -162,16 +162,22 @@ async def st(*,username):# Using * symbol our command can accept a username whic
 	all_spm = str(_all['spm'])
 	all_winRate = str(_all['winRate'])
 
+	#Add VIP/battlestar to displayname if player has ever won
+	if _all['wins'] >= 1:
+		displayName = "<:battlestar:431861736597880837>" + displayName
+	else:
+		displayName = displayName
+
 	#Output the data
 	bold_solo = "__**SOLO**__"
 	bold_squad = "__**SQUADS**__"
 	bold_duo = "__**DUOS**__"
 	bold_all = "__**ALL**__"
 
-	discordOutSquads = bold_squad + ":" + "\n" + "Kills: " + squad_kills + "\n" + "Total matches played: " + squad_matchesPlayed + "\n" + "Last match played: " + squad_lastMatch + "\n" + "Total Minutes played: " + squad_minutesPlayed + "\n" + "No. of wins: " + squad_wins + "\n" + "No. of times in top 3: " + squad_top3 + "\n" + "No. of times in top 6: " + squad_top6 + "\n" + "Total no. of deaths: " + squad_deaths + "\n" + "Kills per death/match: " + squad_kpd + "\n" + "Kills per minute: " + squad_kpm + "\n" + "Score: " + squad_score + "\n" + "Winrate: " + squad_winRate + "\n\n"
-	discordOutSolo = bold_solo + ":" + "\n" + "Kills: " + solo_kills + "\n" + "Total matches played: " + solo_matchesPlayed + "\n" + "Last match played: " + solo_lastMatch + "\n" + "Total Minutes played: " + solo_minutesPlayed + "\n" + "No. of wins: " + solo_wins + "\n" + "No. of times in top 10: " + solo_top10 + "\n" + "No. of times in top 25: " + solo_top25 + "\n" + "Total no. of deaths: " + solo_deaths + "\n" + "Kills per death/match: " + solo_kpd + "\n" + "Kills per minute: " + solo_kpm + "\n" + "Score: " + solo_score + "\n" + "Winrate: " + solo_winRate + "\n\n"
-	discordOutDuos = bold_duo + ":" + "\n" + "Kills: " + duo_kills + "\n" + "Total matches played: " + duo_matchesPlayed + "\n" + "Last match played: " + duo_lastMatch + "\n" + "Total Minutes played: " + duo_minutesPlayed + "\n" + "No. of wins: " + duo_wins + "\n" + "No. of times in top 5: " + duo_top5 + "\n" + "No. of times in top 12: " + duo_top12 + "\n" + "Total no. of deaths: " + duo_deaths + "\n" + "Kills per death/match: " + duo_kpd + "\n" + "Kills per minute: " + duo_kpm + "\n" + "Score: " + duo_score + "\n" + "Winrate: " + duo_winRate + "\n\n"
-	discordOutAll = bold_all + ":" + "\n" + "Kills: " + all_kills + "\n" + "Total matches played: " + all_matchesPlayed + "\n" + "Total Minutes played: " + all_minutesPlayed + "\n" + "No. of wins: " + all_wins + "\n" + "Total no. of deaths: " + all_deaths + "\n" + "Kills per death/match: " + all_kpd + "\n" + "Kills per minute: " + all_kpm + "\n" + "Score: " + all_score + "\n" + "Winrate: " + all_winRate + "\n\n"
+	discordOutSquads = bold_squad + ":" + "\n" + "Kills: " + squad_kills + "\n" + "Total matches played: " + squad_matchesPlayed + "\n" + "Last match played: " + squad_lastMatch + "\n" + "Total Minutes played: " + squad_minutesPlayed + "\n" + "No. of wins: " + squad_wins + " <:vr:431861842952978452>" + "\n" + "No. of times in top 3: " + squad_top3 + "\n" + "No. of times in top 6: " + squad_top6 + "\n" + "Total no. of deaths: " + squad_deaths + "\n" + "Kills per death/match: " + squad_kpd + "\n" + "Kills per minute: " + squad_kpm + "\n" + "Score: " + squad_score + "\n" + "Winrate: " + squad_winRate + "\n\n"
+	discordOutSolo = bold_solo + ":" + "\n" + "Kills: " + solo_kills + "\n" + "Total matches played: " + solo_matchesPlayed + "\n" + "Last match played: " + solo_lastMatch + "\n" + "Total Minutes played: " + solo_minutesPlayed + "\n" + "No. of wins: " + solo_wins + " <:vr:431861842952978452>" + "\n" + "No. of times in top 10: " + solo_top10 + "\n" + "No. of times in top 25: " + solo_top25 + "\n" + "Total no. of deaths: " + solo_deaths + "\n" + "Kills per death/match: " + solo_kpd + "\n" + "Kills per minute: " + solo_kpm + "\n" + "Score: " + solo_score + "\n" + "Winrate: " + solo_winRate + "\n\n"
+	discordOutDuos = bold_duo + ":" + "\n" + "Kills: " + duo_kills + "\n" + "Total matches played: " + duo_matchesPlayed + "\n" + "Last match played: " + duo_lastMatch + "\n" + "Total Minutes played: " + duo_minutesPlayed + "\n" + "No. of wins: " + duo_wins + " <:vr:431861842952978452>" + "\n" + "No. of times in top 5: " + duo_top5 + "\n" + "No. of times in top 12: " + duo_top12 + "\n" + "Total no. of deaths: " + duo_deaths + "\n" + "Kills per death/match: " + duo_kpd + "\n" + "Kills per minute: " + duo_kpm + "\n" + "Score: " + duo_score + "\n" + "Winrate: " + duo_winRate + "\n\n"
+	discordOutAll = bold_all + ":" + "\n" + "Kills: " + all_kills + "\n" + "Total matches played: " + all_matchesPlayed + "\n" + "Total Minutes played: " + all_minutesPlayed + "\n" + "No. of wins: " + all_wins + " <:vr:431861842952978452>" + "\n" + "Total no. of deaths: " + all_deaths + "\n" + "Kills per death/match: " + all_kpd + "\n" + "Kills per minute: " + all_kpm + "\n" + "Score: " + all_score + "\n" + "Winrate: " + all_winRate + "\n\n"
 
 	#Output to server formatted:
 	discordOut = "Match stats for " + "__**" + displayName + "**__" + ":" + "\n\n" + discordOutSquads + discordOutDuos + discordOutSolo + discordOutAll
@@ -189,10 +195,20 @@ tweet = "`.tweet`"
 rps = "`.rps`"
 gn = "`.gn`"
 st = "`.st`"
-help_menu = ft + ":    Random location chooser, gives a randomly choosen location to jump" + "\n\n" + toss + ": Tosses a coin for you" + "\n\n" + roll + ": Rolls a die for you" + "\n\n" + tweet + ": Displays the last three tweets by Fortnite's official handle" + "\n\n" + rps + ": Play Rock, Paper and Scissor" + "\n" + "Usage: " + "`.rps rock`" + "\n\n" + gn + ": Say Good Night to bot" + "\n\n" + st + ": Get player data" + "\n" + "Usage: " + "`.st \"epic username\"`"
+help_menu = ft + ":    Random location chooser, gives a randomly choosen location to jump" + "\n\n" + toss + ": Tosses a coin for you" + "\n\n" + roll + ": Rolls a die for you" + "\n\n" + tweet + ": Displays the last three tweets by Fortnite's official handle" + "\n\n" + rps + ": Play Rock, Paper and Scissor" + "\n" + "Usage: " + "`.rps rock`" + "\n\n" + gn + ": Say Good Night to bot" + "\n\n" + st + ": Get player data" + "\n" + "Usage: " + "`.st \"epic username\"`" + "\n\n" + "Say NO to <:vbuck:431861845318696972> scams! Stay away from scam sites offering free <:vbuck:431861845318696972>"
 @bot.command(pass_context = True)
 async def ask():
 	await bot.say(help_menu)
 
 
 bot.run("discord_secret_goes_here")
+
+#!!!ALERT!!!
+# These custom emojis will not work on your server. Because you have to use your own custom emojis and their respective ids which you have added on your server
+# for more information you can google "use custom emojis discord.py" and read the reddit or stack-overflow links as this is already answered I will not be explaining
+# it in readme.
+
+#Custom emojis will have a unique id just like these:
+#<:vbuck:431861845318696972>
+#<:battlestar:431861736597880837>
+#<:vr:431861842952978452>
