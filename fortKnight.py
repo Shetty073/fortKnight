@@ -44,8 +44,7 @@ async def toss():
 # .roll rolls a die
 @bot.command(pass_context = True)
 async def roll():
-	dice = ["1", "2", "3", "4", "5", "6"]
-	rolled = random.choice(dice)
+	rolled = random.randint(1,6)
 	await bot.say("You have rolled a " + rolled)
 
 # .rps play rock, paper, scissor with the bot
