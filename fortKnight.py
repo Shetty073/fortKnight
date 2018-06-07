@@ -1,3 +1,11 @@
+#!/usr/bin/env python
+__author__ = "Ashish Shetty aka AlphaSierra,"
+__license__ = "MIT"
+__version__ = "1.0"
+__maintainer__ = "AlphaSierra"
+__status__ = "In Progress"
+
+
 import random
 import asyncio
 import discord
@@ -83,13 +91,95 @@ async def tweet():
 # Get player data
 @bot.command()
 async def st(username):
-	api_url = "https://fortnite.y3n.co/v2/player/{0}".format(username) #epicusername
+	api_url = "https://fortnite.y3n.co/v2/player/{0}".format(username)
 	headers = {'User-Agent': 'nodejs request', 'X-Key': 'API-KEY-HERE'}
 	response = req.get(api_url, headers = headers)
 	data_acquired = json.loads(response.content.decode("utf-8"))
-	await bot.say(data_acquired)
-#TODO
-#clean and beautify the json output into readable format
+	displayName = data_acquired['displayName']
+	battle_royale = data_acquired['br']
+	stats = battle_royale['stats']
+	pc = stats['pc']
+	solo = pc['solo']
+	duo = pc['duo']
+	squad = pc['squad']
+	_all = pc['all']
+
+	#Squad_Data
+	squad_kills = str(squad['kills'])
+	squad_matchesPlayed = str(squad['matchesPlayed'])
+	squad_lastMatch = str(squad['lastMatch'])
+	squad_minutesPlayed = str(squad['minutesPlayed'])
+	squad_wins = str(squad['wins'])
+	squad_top3 = str(squad['top3'])
+	squad_top6 = str(squad['top6'])
+	squad_deaths = str(squad['deaths'])
+	squad_kpd = str(squad['kpd'])
+	squad_kpm = str(squad['kpm'])
+	#squad_tpm = str(squad['tpm'])
+	squad_score = str(squad['score'])
+	squad_winRate = str(squad['winRate'])
+
+	#Duo_Data
+	duo_kills = str(duo['kills'])
+	duo_matchesPlayed = str(duo['matchesPlayed'])
+	duo_lastMatch = str(duo['lastMatch'])
+	duo_minutesPlayed = str(duo['minutesPlayed'])
+	duo_wins = str(duo['wins'])
+	duo_top5 = str(duo['top5'])
+	duo_top12 = str(duo['top12'])
+	duo_deaths = str(duo['deaths'])
+	duo_kpd = str(duo['kpd'])
+	duo_kpm = str(duo['kpm'])
+	#duo_tpm = str(duo['tpm'])
+	duo_score = str(duo['score'])
+	duo_winRate = str(duo['winRate'])
+	
+	#Solo_Data
+	solo_kills = str(solo['kills'])
+	solo_matchesPlayed = str(solo['matchesPlayed'])
+	solo_lastMatch = str(solo['lastMatch'])
+	solo_minutesPlayed = str(solo['minutesPlayed'])
+	solo_wins = str(solo['wins'])
+	solo_top10 = str(solo['top10'])
+	solo_top25 = str(solo['top25'])
+	solo_deaths = str(solo['deaths'])
+	solo_kpd = str(solo['kpd'])
+	solo_kpm = str(solo['kpm'])
+	#solo_tpm = str(solo['tpm'])
+	solo_score = str(solo['score'])
+	solo_winRate = str(solo['winRate'])
+	
+	#All_Data
+	all_kills = str(_all['kills'])
+	all_matchesPlayed = str(_all['matchesPlayed'])
+	all_minutesPlayed = str(_all['minutesPlayed'])
+	all_wins = str(_all['wins'])
+	all_score = str(_all['score'])
+	all_kpm = str(_all['kpm'])
+	#all_tpm = str(_all['tpm'])
+	all_deaths = str(_all['deaths'])
+	all_kpd = str(_all['kpd'])
+	all_lastMatch = str(_all['lastMatch'])
+	all_spm = str(_all['spm'])
+	all_winRate = str(_all['winRate'])
+
+	#Output the data
+	bold_solo = "__**SOLO**__"
+	bold_squad = "__**SQUADS**__"
+	bold_duo = "__**DUOS**__"
+	bold_all = "__**ALL**__"
+
+	discordOutSquads = bold_squad + ":" + "\n" + "Kills: " + squad_kills + "\n" + "Total matches played: " + squad_matchesPlayed + "\n" + "Last match played: " + squad_lastMatch + "\n" + "Total Minutes played: " + squad_minutesPlayed + "\n" + "No. of wins: " + squad_wins + "\n" + "No. of times in top 3: " + squad_top3 + "\n" + "No. of times in top 6: " + squad_top6 + "\n" + "Total no. of deaths: " + squad_deaths + "\n" + "Kills per death/match: " + squad_kpd + "\n" + "Kills per minute: " + squad_kpm + "\n" + "Score: " + squad_score + "\n" + "Winrate: " + squad_winRate + "\n\n"
+	discordOutSolo = bold_solo + ":" + "\n" + "Kills: " + solo_kills + "\n" + "Total matches played: " + solo_matchesPlayed + "\n" + "Last match played: " + solo_lastMatch + "\n" + "Total Minutes played: " + solo_minutesPlayed + "\n" + "No. of wins: " + solo_wins + "\n" + "No. of times in top 10: " + solo_top10 + "\n" + "No. of times in top 25: " + solo_top25 + "\n" + "Total no. of deaths: " + solo_deaths + "\n" + "Kills per death/match: " + solo_kpd + "\n" + "Kills per minute: " + solo_kpm + "\n" + "Score: " + solo_score + "\n" + "Winrate: " + solo_winRate + "\n\n"
+	discordOutDuos = bold_duo + ":" + "\n" + "Kills: " + duo_kills + "\n" + "Total matches played: " + duo_matchesPlayed + "\n" + "Last match played: " + duo_lastMatch + "\n" + "Total Minutes played: " + duo_minutesPlayed + "\n" + "No. of wins: " + duo_wins + "\n" + "No. of times in top 5: " + duo_top5 + "\n" + "No. of times in top 12: " + duo_top12 + "\n" + "Total no. of deaths: " + duo_deaths + "\n" + "Kills per death/match: " + duo_kpd + "\n" + "Kills per minute: " + duo_kpm + "\n" + "Score: " + duo_score + "\n" + "Winrate: " + duo_winRate + "\n\n"
+	discordOutAll = bold_all + ":" + "\n" + "Kills: " + all_kills + "\n" + "Total matches played: " + all_matchesPlayed + "\n" + "Total Minutes played: " + all_minutesPlayed + "\n" + "No. of wins: " + all_wins + "\n" + "Total no. of deaths: " + all_deaths + "\n" + "Kills per death/match: " + all_kpd + "\n" + "Kills per minute: " + all_kpm + "\n" + "Score: " + all_score + "\n" + "Winrate: " + all_winRate + "\n\n"
+
+	#Output to server formatted:
+	discordOut = "Match stats for " + "__**" + displayName + "**__" + ":" + "\n\n" + discordOutSquads + discordOutDuos + discordOutSolo + discordOutAll
+	#Output
+	await bot.say(discordOut)
+
+
 
 
 #Help menu
