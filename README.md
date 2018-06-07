@@ -45,7 +45,7 @@
 <br/><br/>
 
 ### Requirements
-* Python 3.5.x or newer
+* Python 3.6.5 or newer
 * Important ones are discord.py and python-twitter (you can check requirements.txt)
 
 <br/><br/><br/><br/>
