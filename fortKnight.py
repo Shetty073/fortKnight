@@ -184,6 +184,54 @@ async def st(*,username):# Using * symbol our command can accept a username whic
 	#Output
 	await bot.say(discordOut)
 
+#Get fortnite server status
+@bot.commands
+async def svr():
+	status_url = "https://fortnite.y3n.co/v2/gamestatus"
+	headers_1 = {'User-Agent': 'nodejs request', 'X-Key': 'API-KEY-HERE'}
+	response_1 = req.get(status_url, headers = headers_1)
+	data_status = json.loads(response_1.content.decode("utf-8"))
+	status = data_status['status']#Fortnite server status
+	message = data_status['message']#server status message
+	#maintenanceUri = data_status['maintenanceUri']
+	status_str = "Server is " + "**" + f"{status}." + "**" + f"{ message}"
+	await bot.say(status_str)
+
+#Get todays shop items
+@bot.commands
+async def shp():
+	shop_url = "https://fortnite.y3n.co/v2/shop"
+	headers_2 = {'User-Agent': 'nodejs request', 'X-Key': 'API-KEY-HERE'}
+	response_2 = req.get(shop_url, headers = headers_2)
+	shop_status = json.loads(response_2.content.decode("utf-8"))
+	#print(list(shop_status.keys())) TEST checking for keys available
+	br_shop = shop_status['br']
+	#print(list(br_shop.keys())) TEST checking for keys available
+	wk_shop = br_shop['weekly']
+	dl_shop = br_shop['daily']
+	wk_item1 = wk_shop[0]
+	wk_item2 = wk_shop[1]
+	dl_item1 = dl_shop[0]
+	dl_item2 = dl_shop[1]
+	dl_item3 = dl_shop[2]
+	dl_item4 = dl_shop[3]
+	dl_item5 = dl_shop[4]
+	dl_item6 = dl_shop[5]
+
+	#weekly items/images
+	wk_item1_url = wk_item1['imgURL']
+	wk_item2_url = wk_item2['imgURL']
+
+	#daily items/images
+	dl_item1_url = dl_item1['imgURL']
+	dl_item2_url = dl_item2['imgURL']
+	dl_item3_url = dl_item3['imgURL']
+	dl_item4_url = dl_item4['imgURL']
+	dl_item5_url = dl_item5['imgURL']
+	dl_item6_url = dl_item6['imgURL']
+
+	bold_shopitm = "__**Today's shop items are**__"
+	shop_out = bold_shopitm + ":" + wk_item1_url + "\n" + wk_item2_url + "\n" + dl_item1_url + "\n" + dl_item2_url + "\n" + dl_item3_url + "\n" + dl_item4_url + "\n" + dl_item5_url + "\n" + dl_item6_url + "\n"
 
 
 
@@ -195,7 +243,9 @@ tweet = "`.tweet`"
 rps = "`.rps`"
 gn = "`.gn`"
 st = "`.st`"
-help_menu = ft + ":    Random location chooser, gives a randomly choosen location to jump" + "\n\n" + toss + ": Tosses a coin for you" + "\n\n" + roll + ": Rolls a die for you" + "\n\n" + tweet + ": Displays the last three tweets by Fortnite's official handle" + "\n\n" + rps + ": Play Rock, Paper and Scissor" + "\n" + "Usage: " + "`.rps rock`" + "\n\n" + gn + ": Say Good Night to bot" + "\n\n" + st + ": Get player data" + "\n" + "Usage: " + "`.st \"epic username\"`" + "\n\n" + "Say NO to <:vbuck:431861845318696972> scams! Stay away from scam sites offering free <:vbuck:431861845318696972>"
+svr = "`.svr`"
+shp = "`.shp`"
+help_menu = ft + ":    Random location chooser, gives a randomly choosen location to jump" + "\n\n" + toss + ": Tosses a coin for you" + "\n\n" + roll + ": Rolls a die for you" + "\n\n" + tweet + ": Displays the last three tweets by Fortnite's official handle" + "\n\n" + rps + ": Play Rock, Paper and Scissor" + "\n" + "Usage: " + "`.rps rock`" + "\n\n" + gn + ": Say Good Night to bot" + "\n\n" + st + ": Get player data" + "\n" + "Usage: " + "`.st \"epic username\"`" + "\n\n" + svr + "Get the Fortnite server status. Whether the servers are UP or DOWN" + "\n\n" + shp + "Get today's items from the item shop" + "\n\n" + "Say NO to <:vbuck:431861845318696972> scams! Stay away from scam sites offering free <:vbuck:431861845318696972>"
 @bot.command(pass_context = True)
 async def ask():
 	await bot.say(help_menu)
