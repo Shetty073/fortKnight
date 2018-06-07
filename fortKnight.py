@@ -91,7 +91,7 @@ async def tweet():
 # Get player data
 @bot.command()
 async def st(username):
-	api_url = "https://fortnite.y3n.co/v2/player/{0}".format(username)
+	api_url = f"https://fortnite.y3n.co/v2/player/{username}"
 	headers = {'User-Agent': 'nodejs request', 'X-Key': 'API-KEY-HERE'}
 	response = req.get(api_url, headers = headers)
 	data_acquired = json.loads(response.content.decode("utf-8"))
