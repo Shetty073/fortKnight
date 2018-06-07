@@ -185,7 +185,7 @@ async def st(*,username):# Using * symbol our command can accept a username whic
 	await bot.say(discordOut)
 
 #Get fortnite server status
-@bot.commands
+@bot.command()
 async def svr():
 	status_url = "https://fortnite.y3n.co/v2/gamestatus"
 	headers_1 = {'User-Agent': 'nodejs request', 'X-Key': 'API-KEY-HERE'}
@@ -198,7 +198,7 @@ async def svr():
 	await bot.say(status_str)
 
 #Get todays shop items
-@bot.commands
+@bot.command()
 async def shp():
 	shop_url = "https://fortnite.y3n.co/v2/shop"
 	headers_2 = {'User-Agent': 'nodejs request', 'X-Key': 'API-KEY-HERE'}
