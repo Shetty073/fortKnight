@@ -36,6 +36,8 @@
 * `.rps` - Play rock, paper, scissor with the bot
 * `gn` - Say good night to the bot
 * `st` - Get the fortnite player data. Usage: `.st "epic_username"` Version 1.0
+* `.svr` - Get fortnite server status
+* `.shp` - Get today's items in item shop
 
 ### Version:
 
