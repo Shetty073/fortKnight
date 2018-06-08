@@ -11,7 +11,7 @@ import asyncio
 import discord
 from discord.ext.commands import Bot
 import twitter
-#import requests as req
+import requests as req
 
 #Prefix for commands is set
 bot = Bot(command_prefix = '.')
