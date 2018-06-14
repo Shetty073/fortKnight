@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = "Ashish Shetty aka AlphaSierra,"
 __license__ = "MIT"
-__version__ = "1.0"
+__version__ = "2.0.0"
 __maintainer__ = "AlphaSierra"
 __status__ = "In Progress"
 

@@ -44,8 +44,16 @@
 
 ### Version:
 
-## 1.0:
+## 1.0.0:
 * '.st' command added with other improvements
+## 1.1.0:
+* `.svr` command added
+* `.shp` command added with some minor improvements
+## 2.0.0:
+* `.wlist` command added
+* `.wstat` command added
+* Major improvements made and exceptions handled properly
+* Officially not a work in progress anymore
 
 <br/><br/>
 
@@ -69,5 +77,3 @@
 <br/><br/><br/><br/>
 
 Ignore the file named "Procfile" it is not required to run the bot from local machine.
-
-### This is a Work In Progress
