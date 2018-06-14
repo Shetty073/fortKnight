@@ -32,12 +32,13 @@
 * `.toss` - Toss a coin
 * `.roll` - Roll a die
 * `.tweet` - Grab the last three tweets by Fortnite's [official twitter](https://twitter.com/FortniteGame)
-<<<<<<< HEAD
 * `.rps` - Play rock, paper, scissor with the bot
 * `gn` - Say good night to the bot
 * `st` - Get the fortnite player data. Usage: `.st "epic_username"` Version 1.0
 * `.svr` - Get fortnite server status
 * `.shp` - Get today's items in item shop
+* `.wlist` - Get list of all available in-game weapons
+* `.wstat` - Gets details of fortnite battle royale in-game weapons by specifying name and rarity. Usage: `.wstat legendary scar` or `.wstat epic hand cannon`
 
 ### Version:
 
