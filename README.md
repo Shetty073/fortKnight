@@ -26,6 +26,8 @@
 ![gn to bot](https://i.imgur.com/px5od8Y.png)
 ##### Get player statistics like total wins, last match played, etc
 ![.st command](https://i.imgur.com/phh8VEK.png)
+##### Exception handling done with expected results
+![Exception Handling](https://i.imgur.com/Wy6MUFH.png)
 
 ### Commands
 * `.ft` - This will geta random fortnite game location name for the players to decide to jump to
