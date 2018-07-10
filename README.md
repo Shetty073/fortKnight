@@ -11,9 +11,23 @@
 
 ### How does it work?
 ##### Just '.ask' for help 😉
-![Help Menu](https://i.imgur.com/bkmpzVX.png)
+![Help Menu](https://i.imgur.com/TtHI6LO.png)
 ##### The random location list command
 ![ft command](https://i.imgur.com/c7q7Wzg.png)
+##### Get player statistics like total wins, last match played, etc
+![st command](https://i.imgur.com/phh8VEK.png)
+##### Get the latest Fortnite server status
+![Server status](https://i.imgur.com/W9BM0vn.png)
+##### Get latest in-game shop items with cost images
+![Shop items](https://i.imgur.com/rnx40VV.png)
+##### Get the list of in-game weapons
+![Weapons list](https://i.imgur.com/EYG1HPf.png)
+##### Get the stats of a particular weapon
+![Weapon stat](https://i.imgur.com/fw2nWWC.png)
+##### Get information for a particular Movie/TV Series
+![Movie/TV series ](https://i.imgur.com/aOWEVGd.png)
+##### Exception handling done with expected results
+![Exception handling](https://i.imgur.com/Wy6MUFH.png)
 ##### Toss a coin
 ![toss a coin](https://i.imgur.com/fisjA1v.png)
 ##### Roll a die
@@ -24,10 +38,6 @@
 ![rps game command](https://i.imgur.com/Vn1g9cp.png)
 ##### Say Good Night to the bot He will appreciate it 😂
 ![gn to bot](https://i.imgur.com/px5od8Y.png)
-##### Get player statistics like total wins, last match played, etc
-![.st command](https://i.imgur.com/phh8VEK.png)
-##### Exception handling done with expected results
-![Exception Handling](https://i.imgur.com/Wy6MUFH.png)
 
 ### Commands
 * `.ft` - This will geta random fortnite game location name for the players to decide to jump to
