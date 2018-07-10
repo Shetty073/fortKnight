@@ -24,6 +24,8 @@
 ![Weapons list](https://i.imgur.com/EYG1HPf.png)
 ##### Get the stats of a particular weapon
 ![Weapon stat](https://i.imgur.com/fw2nWWC.png)
+##### Get latest tweets from [FortniteGame](https://twitter.com/FortniteGame)
+![tweet's from Fortnite official](https://i.imgur.com/r9uHLLP.png)
 ##### Get information for a particular Movie/TV Series
 ![Movie/TV series ](https://i.imgur.com/aOWEVGd.png)
 ##### Exception handling done with expected results
@@ -32,8 +34,6 @@
 ![toss a coin](https://i.imgur.com/fisjA1v.png)
 ##### Roll a die
 ![roll a die](https://i.imgur.com/l2NkgK4.png)
-##### Get latest tweets from [FortniteGame](https://twitter.com/FortniteGame)
-![tweet's from Fortnite official](https://i.imgur.com/r9uHLLP.png)
 ##### Bored waiting for a member to leave a squad, play Rock, Paper, Scissor with the bot till then
 ![rps game command](https://i.imgur.com/Vn1g9cp.png)
 ##### Say Good Night to the bot He will appreciate it 😂
