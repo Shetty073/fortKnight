@@ -290,45 +290,70 @@ async def wlist():
 	wList = "```" + wList + "```"
 	await bot.say(wList)
 
-
 # Gets details of weapon by name and rarity
 @bot.command()
 async def wstat(weaponRarity, *, weaponName):
 	# API call and raw response
 	weapons_stats = "http://www.fortnitechests.info/api/weapons"
 	header_for_wstats = {'accept': 'application/json'}
-	response_4 = req.get(weapons_stats, headers = header_for_wstats)
-	wstats_acquired = json.loads(response_4.content.decode("utf-8"))
+	response_4 = req.get(weapons_stats, headers=header_for_wstats)
 
-	try:
-		# Processing response for individual data
-		weaponName = weaponName.title()
-		weaponRarity = weaponRarity.lower()
-		weapon = list(filter(lambda weapon: weapon['name'] == f'{weaponName}' and weapon['rarity'] == f'{weaponRarity}', wstats_acquired))
-		weapon = weapon[0]
+	if response_4.status_code == 200:
+		wstats_acquired = json.loads(response_4.content.decode("utf-8"))
+		try:
+				# Processing response for individual data
+			weaponName = weaponName.title()
+			weaponRarity = weaponRarity.lower()
+			weapon = list(filter(
+				lambda weapon: weapon['name'] == f'{weaponName}' and weapon['rarity'] == f'{weaponRarity}', wstats_acquired))
+			weapon = weapon[0]
 
-		# Get individual data by 'keys'
-		wName = weapon['name']
-		wRarity = weapon['rarity']
-		wType = weapon['type']
-		wDps = str(weapon['dps'])
-		wDamage = str(weapon['damage'])
-		wHeadShotDamage = str(weapon['headshotdamage'])
-		wFireRate = str(weapon['firerate'])
-		wMagSize = str(weapon['magsize'])
-		wRange = str(weapon['range'])
-		wDurability = str(weapon['durability'])
-		wReloadTime = str(weapon['reloadtime'])
-		wAmmoCost = str(weapon['ammocost'])
-		wImpact = str(weapon['impact'])
+			# Get individual data by 'keys'
+			wName = weapon['name']
+			wRarity = weapon['rarity']
+			wType = weapon['type']
+			wDps = str(weapon['dps'])
+			wDamage = str(weapon['damage'])
+			wHeadShotDamage = str(weapon['headshotdamage'])
+			wFireRate = str(weapon['firerate'])
+			wMagSize = str(weapon['magsize'])
+			wRange = str(weapon['range'])
+			wDurability = str(weapon['durability'])
+			wReloadTime = str(weapon['reloadtime'])
+			wAmmoCost = str(weapon['ammocost'])
+			wImpact = str(weapon['impact'])
 
-		# Get the output ready to send
-		weaponDetails = "Name: " + wName + "\n" + "Rarity: " + wRarity + "\n" + "Type: " + wType + "\n" + "DPS: " + wDps + "\n" + "Damage: " + wDamage + "\n" + "Headshot Damage: " + wHeadShotDamage + "\n" + "Firerate: " + wFireRate + "\n" + "Magsize Size: " + wMagSize + "\n" + "Range: " + wRange + "\n" + "Durability: " + wDurability + "\n" + "Reload Time: " + wReloadTime + "\n" + "Ammocost: " + wAmmoCost + "\n" + "Impact: " + wImpact + "\n"
-		await bot.say(weaponDetails)
-	except IndexError:
-		await bot.say("Invalid input!! please check weapon name and rarity combination before you type again" + "\n" + "Use the " + "`.wlist`" + " command for the list of available in-game weapons.")
+			# Get the output ready to send
+			weaponDetails = "Name: " + wName + "\n" + "Rarity: " + wRarity + "\n" + "Type: " + wType + "\n" + "DPS: " + wDps + "\n" + "Damage: " + wDamage + "\n" + "Headshot Damage: " + wHeadShotDamage + "\n" + "Firerate: " + \
+                            wFireRate + "\n" + "Magsize Size: " + wMagSize + "\n" + "Range: " + wRange + "\n" + "Durability: " + wDurability + \
+                            "\n" + "Reload Time: " + wReloadTime + "\n" + "Ammocost: " + \
+                            wAmmoCost + "\n" + "Impact: " + wImpact + "\n"
+			await bot.say(weaponDetails)
+		except IndexError:
+			await bot.say("Invalid input!! please check weapon name and rarity combination before you type again" + "\n" + "Use the " + "`.wlist`" + " command for the list of available in-game weapons.")
+	else:
+		await bot.say("API service unavailable! Please try again later")
 
 
+@bot.command()
+async def mv(*, movieTitle):
+	omdbURL = "http://www.omdbapi.com/?t=" + movieTitle + "&apikey=API_KEY_GOES_HERE"
+	responseOMDB = req.get(omdbURL)
+	if responseOMDB.status_code == 200:
+		OMDBresult = json.loads(responseOMDB.content.decode("utf-8"))
+		responseMovieAvail = OMDBresult.get('Response')
+		if responseMovieAvail == "True":
+			movieList = []
+			for k, v in OMDBresult.items():
+				if k == "Ratings":
+					pass
+				else:
+					movieList.append(f"**{k}**" + ":" + f" {v}" + "\n")
+			await bot.say(" ".join(movieList))
+		else:
+			await bot.say("Movie not found! ")
+	else:
+		await bot.say("API service is down! Please try again later...")
 
 
 #Help menu
@@ -343,11 +368,17 @@ svr = "`.svr`"
 shp = "`.shp`"
 wlist = "`.wlist`"
 wstat = "`.wstat`"
-help_menu = ft + ":    Random location chooser, gives a randomly choosen location to jump" + "\n\n" + toss + ": Tosses a coin for you" + "\n\n" + roll + ": Rolls a die for you" + "\n\n" + tweet + ": Displays the last three tweets by Fortnite's official handle" + "\n\n" + rps + ": Play Rock, Paper and Scissor" + "\n" + "Usage: " + "`.rps rock`" + "\n\n" + gn + ": Say Good Night to bot" + "\n\n" + st + ": Get player data" + "\n" + "Usage: " + "`.st \"epic username\"`" + "\n\n" + svr + ": Get the Fortnite server status. Whether the servers are UP or DOWN" + "\n\n" + shp + ": Get today's items from the item shop" + "\n\n" + wlist + ": Get the list of all weapons available to you in-game" + "\n\n" + wstat + ": Get detailed statics of a specified weapon  " + "\n" + "Usage: " + wstat + " \'legendary\'" + " \'scar\'" +"\n\n" + "Say NO to <:vbuck:431861845318696972> scams! Stay away from scam sites offering free <:vbuck:431861845318696972>" + "\n\n\n\n" + "`Huge improvement underway for this bot. Stay tuned.....`"
-@bot.command(pass_context = True)
+mv = "`.mv`"
+help_menu = ft + ":    Random location chooser, gives a randomly choosen location to jump" + "\n\n" + toss + ": Tosses a coin for you" + "\n\n" + roll + ": Rolls a die for you" + "\n\n" + tweet + ": Displays the last three tweets by Fortnite's official handle" + "\n\n" + rps + ": Play Rock, Paper and Scissor" + "\n" + "Usage: " + "`.rps rock`" + "\n\n" + gn + ": Say Good Night to bot" + "\n\n" + st + ": Get player data" + "\n" + "Usage: " + "`.st \"epic username\"`" + "\n\n" + svr + ": Get the Fortnite server status. Whether the servers are UP or DOWN" + \
+    "\n\n" + shp + ": Get today's items from the item shop" + "\n\n" + wlist + ": Get the list of all weapons available to you in-game" + "\n\n" + wstat + ": Get detailed statics of a specified weapon  " + "\n" + "Usage: " + wstat + " \'legendary\'" + " \'scar\'" + "\n\n" + \
+    mv + ": Get details of movie/TV series by typing " + mv + " 'Movie name'" + "\n\n" + \
+   	"Say NO to <:vbuck:431861845318696972> scams! Stay away from scam sites offering free <:vbuck:431861845318696972>" + \
+  		"`Huge improvement underway for this bot. Stay tuned.....`" + "\n\n\n\n"
+
+
+@bot.command(pass_context=True)
 async def ask():
 	await bot.say(help_menu)
-
 
 
 bot.run("CLIENT_SECRET_GOES_HERE")
