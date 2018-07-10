@@ -40,7 +40,8 @@
 * `.svr` - Get fortnite server status
 * `.shp` - Get today's items in item shop
 * `.wlist` - Get list of all available in-game weapons
-* `.wstat` - Gets details of fortnite battle royale in-game weapons by specifying name and rarity. Usage: `.wstat legendary scar` or `.wstat epic hand cannon`
+* `.wstat` - Get details of fortnite battle royale in-game weapons by specifying name and rarity. Usage: `.wstat legendary scar` or `.wstat epic hand cannon`
+* `.mv` - Get movie/TV series information. Usage: `.mv` 'movie name' for e.g. `.mv the mentalist`
 
 ### Version:
 
@@ -54,6 +55,7 @@
 * `.wstat` command added
 * Major improvements made and exceptions handled properly
 * Officially not a work in progress anymore
+* `.mv` command added
 
 <br/><br/>
 
