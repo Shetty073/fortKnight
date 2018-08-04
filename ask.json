@@ -1,0 +1,12 @@
+{
+	".st" : "Get Fortnite: Battle Royale player stats",
+	".tweet": "Get latest three tweets by Fortnite's official twitter handle",
+	".ft": "Get a random location to jump in Battle Royale map",
+	".roll": "Roll a die(ce)",
+	".toss": "Toss a coin",
+	".wlist": "Get list of all available in-game weapons",
+	".wstat": "Get statsheet of a particular weapon. (Usage: .wstat weapon_rarity weapon_name)",
+	".shp": "Get today's in-game shop items",
+	".mv": "Get movie details (Usage: .mv movie_name)",
+	"NOTE:": "This bot is not yet complete and is under development..."
+}

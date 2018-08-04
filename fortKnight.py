@@ -1,264 +1,281 @@
-#!/usr/bin/env python
-__author__ = "Ashish Shetty aka AlphaSierra,"
-__license__ = "MIT"
-__version__ = "2.0.0"
-__maintainer__ = "AlphaSierra"
-__status__ = "In Progress"
-
-
-import random
-import asyncio
 import discord
-from discord.ext.commands import Bot
 import twitter
-import json
+from discord.ext import commands
 import requests as req
+from random import choice
+import json
+import configparser
 
-#Prefix for commands is set
-bot = Bot(command_prefix = '.')
 
-#On startup this message is shown on server side if everything and bot starts up fine
-#Second line sets the Discord bot's playing status
+# Using configparser get the token from configuration file
+config = configparser.ConfigParser()
+config.read("config.ini")
+TOKEN = config["BOT"]["token"]
+CONSUMER_KEY = config["TWITTER"]["consumer_key"]
+CONSUMER_SECRET = config["TWITTER"]["consumer_secret"]
+ACCESS_TOKEN_KEY = config["TWITTER"]["access_token_key"]
+ACCESS_TOKEN_SECRET = config["TWITTER"]["access_token_secret"]
+API_KEY = config["FORTNITE"]["st_key"]
+
+# Bot code begins
+bot = commands.Bot(command_prefix='.', description="just `.ask` for help", case_insensitive=True)
+
 @bot.event
 async def on_ready():
+	print(bot.user.name)
 	print("Let the battle begin")
-	await bot.change_presence(game=discord.Game(name='.ask for help'))
+	await bot.change_presence(activity=discord.Game("just .ask for help"))
+
+# Say good night to members
+@bot.event
+async def on_message(msg):
+	message = msg.content.lower()
+	auth = msg.author.name
+	ch = msg.channel
+	if message == "good night" or message == "gn":
+		await ch.send(f"Good Night {auth}")
+	await bot.process_commands(msg)
 
 # .ft command gives the name of a fortnite location
-@bot.command(pass_context = True)
-async def ft():
-	places = ["Hero House", "Villain House", "Risky Reels", "Lucky Landing", "China Motel", "New Factories", "Motel", "anywhere you want", "Football Ground", "Between Shifty and Flush", "Container", "Jail", "North of Wailing Woods", "Anarchy Acres", "Dusty Divot", "Fatal Fields", "Flush Factory", "Greasy Grove", "Haunted Hills", "Junk Junction", "Lonely Lodge", "Loot Lake", "Moisty Mire", "Pleasant Park", "Retail Row", "Salty Springs", "Shifty Shafts", "Snobby Shores", "Tilted Towers", "Tomato Town", "Wailing Woods"]
-	plc = random.choice(places)
-	place = plc.lower()
-	if plc == "anywhere you want":
-		await bot.say("Go " + place)
+@bot.command()
+async def ft(ctx):
+	places = ["Risky Reels", "Lucky Landing", 
+	"China Motel", "New Factories", "Motel", "anywhere you want", 
+	"Football Ground", "Between Shifty and Flush", "Container", "Paradise Palms",
+	"North of Wailing Woods","Dusty Divot","Fatal Fields", "Flush Factory", 
+	"Greasy Grove", "Haunted Hills", "Junk Junction", "Lonely Lodge", 
+	"Loot Lake","Pleasant Park", "Retail Row", "Salty Springs", "Lazy Links",
+	"Shifty Shafts", "Snobby Shores", "Tilted Towers", "Tomato Town", "Wailing Woods"]
+	place = choice(places)
+	if place == "anywhere you want":
+		await ctx.send(f"Go {place}..")
 	else:
-		await bot.say("Go to " + place)
-
-# .toss tosses a coin
-@bot.command(pass_context = True)
-async def toss():
-	coin = ["Heads", "Tails"]
-	flip = random.choice(coin)
-	await bot.say("It is " + flip)
+		await ctx.send(f"Go to {place}")
 
 # .roll rolls a die
-@bot.command(pass_context = True)
-async def roll():
-	rolled = random.randint(1,6)
-	rolled = str(rolled)
-	await bot.say("You have rolled a " + rolled)
-
-# .rps play rock, paper, scissor with the bot
 @bot.command()
-async def rps(playerChoice):
-	frtnight = ["rock", "paper", "scissor"]
-	botChoice = random.choice(frtnight)
-	playerChoice = playerChoice.lower()
-	if botChoice == playerChoice:
-		await bot.say("You said " + playerChoice + " and I said " + botChoice + "\n" + "Its a tie!")
-	elif botChoice == "rock" and playerChoice == "paper":
-		await bot.say("You said paper and I said rock." + "\n" + "You won! I lost!")
-	elif botChoice == "rock" and playerChoice == "scissor":
-		await bot.say("You said scissor and I said rock." + "\n" + "I won! You lost! haha")
-	elif botChoice == "paper" and playerChoice == "rock":
-		await bot.say("You said rock and I said paper." + "\n" + "I won! You lost! haha")
-	elif botChoice == "paper" and playerChoice == "scissor":
-		await bot.say("You said scissor and I said paper." + "\n" + "You won! I lost!")
-	elif botChoice == "scissor" and playerChoice == "paper":
-		await bot.say("You said paper and I said scissor." + "\n" + "You won! I loose!")
-	elif botChoice == "scissor" and playerChoice == "rock":
-		await bot.say("You said rock and I said scissor." + "\n" + "You won! I lost!")
+async def roll(ctx):
+	await ctx.send(f"You have rolled a {choice(range(1, 7))}")
 
-# .gn say good night to bot
+# .toss toss a coin
 @bot.command()
-async def gn():
-	await bot.say("Good Night" + "\n" + ":fist: :sweat_drops:")
+async def toss(ctx):
+	coin = choice(("Heads", "Tails"))
+	await ctx.send(f"It's {coin}")
 
 # .tweet gets the latest tweet by Fortnite
-api = twitter.Api(consumer_key = 'CONSUMER-KEY',
-                  consumer_secret = 'CONSUMER-SECRET',
-                  access_token_key = 'ACCESS-TOKEN-KEY',
-                  access_token_secret = 'ACCESS-TOKEN-SECRET')
-t = api.GetUserTimeline(screen_name="FortniteGame", count=3)
-tweets = [i.AsDict() for i in t]
-@bot.command(pass_context = True)
-async def tweet():
-	await bot.say("```Last three tweets by Fortnite official twitter handle:``` \n")
+@bot.command()
+async def tweet(ctx):
+	birds = []
+	api = twitter.Api(consumer_key=CONSUMER_KEY,
+                   consumer_secret=CONSUMER_SECRET,
+                   access_token_key=ACCESS_TOKEN_KEY,
+                   access_token_secret=ACCESS_TOKEN_SECRET)
+	t = api.GetUserTimeline(screen_name="FortniteGame", count=3)
+	tweets = [i.AsDict() for i in t]
 	for t in tweets:
-		bird = t['text']
-		await bot.say(bird)
+		birds.append(t['text'] + "\n")
+	
+	tweet_embed = discord.Embed(
+		title="@FortniteGame on twitter",
+		type="rich",
+		description="Latest 3 tweets",
+		colour=discord.Colour.blue()
+	)
+	tweet_embed.set_author(name="FortniteGame on twitter:",
+                        icon_url="https://i.imgur.com/JijqpW9.jpg")
+	tweet_embed.add_field(name="Tweet 1", value=birds[0], inline=False)
+	tweet_embed.add_field(name="Tweet 2", value=birds[1], inline=False)
+	tweet_embed.add_field(name="Tweet 3", value=birds[2], inline=False)
+	await ctx.send(embed=tweet_embed)
 
 # Get player data
 @bot.command()
-async def st(*,username):
+async def st(ctx,*epic_name):
 	try:
-		api_url = f"https://fortnite.y3n.co/v2/player/{username}"
-		headers = {'User-Agent': 'nodejs request', 'X-Key': 'API-KEY-GOES-HERE'}
-		response = req.get(api_url, headers = headers)
-		data_acquired = json.loads(response.content.decode("utf-8"))
-		displayName = data_acquired['displayName']
-		battle_royale = data_acquired['br']
-		stats = battle_royale['stats']
-		pc = stats['pc']
-		solo = pc['solo']
-		duo = pc['duo']
-		squad = pc['squad']
-		_all = pc['all']
+		st_url = "https://fortnite-public-api.theapinetwork.com/prod09/users/id"
+		st_headers = {'Authorization': API_KEY}
+		st_data = req.post(st_url, data={'username': epic_name}, headers=st_headers)
+		st_json = json.loads(st_data.content.decode("utf-8"))
+	except Exception as e:
+		await ctx.send(f"API error!! Error code: {e}")
+		# Get stats
+	try:
+		s_url = "https://fortnite-public-api.theapinetwork.com/prod09/users/public/br_stats"
+		s_headers = {'Authorization': API_KEY}
+		s_data = req.post(s_url, data={
+                    'user_id': st_json["uid"], 'platform': 'pc', 'window': "alltime"}, headers=s_headers)
+		s_json = json.loads(s_data.content.decode("utf-8"))
+	except Exception as e:
+		await ctx.send(f"API error!! Error code: {e}")
+	s_json_stat = s_json["stats"]
+	s_json_totals = s_json["totals"]
+	usr = s_json["username"]
+	win_pr = s_json["window"]
+	s_json_stat_embed = ""
+	s_json_totals_embed = ""  # this is for the embed
+	for k, v in s_json_stat.items():
+		s_json_stat_embed += f"**{k}**: {v}\n"
+	for k, v in s_json_totals.items():
+		s_json_totals_embed += f"**{k}**: {v}\n"
+	st_embed = discord.Embed(
+		title="Player statistics",
+		type="rich",
+		description="Platform: PC",
+		colour=discord.Colour.purple()
+	)
+	st_embed.set_author(name=f"Showing stats of {usr} for {win_pr}",
+					icon_url="https://i.imgur.com/JijqpW9.jpg")
+	st_embed.add_field(name="Squad/Duo/Solo: ", 
+						value=f"{s_json_stat_embed}\n\n", inline=False)
+	st_embed.add_field(name="Total overall: ",
+	            		value=f"{s_json_totals_embed}", inline=False)
+	await ctx.send(embed=st_embed)
 
-		#Squad_Data
-		squad_kills = str(squad['kills'])
-		squad_matchesPlayed = str(squad['matchesPlayed'])
-		squad_lastMatch = str(squad['lastMatch'])
-		squad_minutesPlayed = str(squad['minutesPlayed'])
-		squad_wins = str(squad['wins'])
-		squad_top3 = str(squad['top3'])
-		squad_top6 = str(squad['top6'])
-		squad_deaths = str(squad['deaths'])
-		squad_kpd = str(squad['kpd'])
-		squad_kpm = str(squad['kpm'])
-		#squad_tpm = str(squad['tpm'])
-		squad_score = str(squad['score'])
-		squad_winRate = str(squad['winRate'])
-
-		#Duo_Data
-		duo_kills = str(duo['kills'])
-		duo_matchesPlayed = str(duo['matchesPlayed'])
-		duo_lastMatch = str(duo['lastMatch'])
-		duo_minutesPlayed = str(duo['minutesPlayed'])
-		duo_wins = str(duo['wins'])
-		duo_top5 = str(duo['top5'])
-		duo_top12 = str(duo['top12'])
-		duo_deaths = str(duo['deaths'])
-		duo_kpd = str(duo['kpd'])
-		duo_kpm = str(duo['kpm'])
-		#duo_tpm = str(duo['tpm'])
-		duo_score = str(duo['score'])
-		duo_winRate = str(duo['winRate'])
-		
-		#Solo_Data
-		solo_kills = str(solo['kills'])
-		solo_matchesPlayed = str(solo['matchesPlayed'])
-		solo_lastMatch = str(solo['lastMatch'])
-		solo_minutesPlayed = str(solo['minutesPlayed'])
-		solo_wins = str(solo['wins'])
-		solo_top10 = str(solo['top10'])
-		solo_top25 = str(solo['top25'])
-		solo_deaths = str(solo['deaths'])
-		solo_kpd = str(solo['kpd'])
-		solo_kpm = str(solo['kpm'])
-		#solo_tpm = str(solo['tpm'])
-		solo_score = str(solo['score'])
-		solo_winRate = str(solo['winRate'])
-		
-		#All_Data
-		all_kills = str(_all['kills'])
-		all_matchesPlayed = str(_all['matchesPlayed'])
-		all_minutesPlayed = str(_all['minutesPlayed'])
-		all_wins = str(_all['wins'])
-		all_score = str(_all['score'])
-		all_kpm = str(_all['kpm'])
-		#all_tpm = str(_all['tpm'])
-		all_deaths = str(_all['deaths'])
-		all_kpd = str(_all['kpd'])
-		all_lastMatch = str(_all['lastMatch'])
-		all_spm = str(_all['spm'])
-		all_winRate = str(_all['winRate'])
-
-		#Add VIP/battlestar to displayname if player has ever won
-		if _all['wins'] >= 1:
-			displayName = "<:battlestar:431861736597880837>" + displayName
-		else:
-			displayName = displayName
-
-		#Output the data
-		bold_solo = "__**SOLO**__"
-		bold_squad = "__**SQUADS**__"
-		bold_duo = "__**DUOS**__"
-		bold_all = "__**ALL**__"
-
-		discordOutSquads = bold_squad + ":" + "\n" + "Kills: " + squad_kills + "\n" + "Total matches played: " + squad_matchesPlayed + "\n" + "Last match played: " + squad_lastMatch + "\n" + "Total Minutes played: " + squad_minutesPlayed + "\n" + "No. of wins: " + squad_wins + " <:vr:431861842952978452>" + "\n" + "No. of times in top 3: " + squad_top3 + "\n" + "No. of times in top 6: " + squad_top6 + "\n" + "Total no. of deaths: " + squad_deaths + "\n" + "Kills per death/match: " + squad_kpd + "\n" + "Kills per minute: " + squad_kpm + "\n" + "Score: " + squad_score + "\n" + "Winrate: " + squad_winRate + "\n\n"
-		discordOutSolo = bold_solo + ":" + "\n" + "Kills: " + solo_kills + "\n" + "Total matches played: " + solo_matchesPlayed + "\n" + "Last match played: " + solo_lastMatch + "\n" + "Total Minutes played: " + solo_minutesPlayed + "\n" + "No. of wins: " + solo_wins + " <:vr:431861842952978452>" + "\n" + "No. of times in top 10: " + solo_top10 + "\n" + "No. of times in top 25: " + solo_top25 + "\n" + "Total no. of deaths: " + solo_deaths + "\n" + "Kills per death/match: " + solo_kpd + "\n" + "Kills per minute: " + solo_kpm + "\n" + "Score: " + solo_score + "\n" + "Winrate: " + solo_winRate + "\n\n"
-		discordOutDuos = bold_duo + ":" + "\n" + "Kills: " + duo_kills + "\n" + "Total matches played: " + duo_matchesPlayed + "\n" + "Last match played: " + duo_lastMatch + "\n" + "Total Minutes played: " + duo_minutesPlayed + "\n" + "No. of wins: " + duo_wins + " <:vr:431861842952978452>" + "\n" + "No. of times in top 5: " + duo_top5 + "\n" + "No. of times in top 12: " + duo_top12 + "\n" + "Total no. of deaths: " + duo_deaths + "\n" + "Kills per death/match: " + duo_kpd + "\n" + "Kills per minute: " + duo_kpm + "\n" + "Score: " + duo_score + "\n" + "Winrate: " + duo_winRate + "\n\n"
-		discordOutAll = bold_all + ":" + "\n" + "Kills: " + all_kills + "\n" + "Total matches played: " + all_matchesPlayed + "\n" + "Total Minutes played: " + all_minutesPlayed + "\n" + "No. of wins: " + all_wins + " <:vr:431861842952978452>" + "\n" + "Total no. of deaths: " + all_deaths + "\n" + "Kills per death/match: " + all_kpd + "\n" + "Kills per minute: " + all_kpm + "\n" + "Score: " + all_score + "\n" + "Winrate: " + all_winRate + "\n\n"
-
-		#Output to server formatted:
-		discordOut = "Match stats for " + "__**" + displayName + "**__" + ":" + "\n\n" + discordOutSquads + discordOutDuos + discordOutSolo + discordOutAll
-		#Output
-		await bot.say(discordOut)
-	except Exception:
-		await bot.say("Oh oh! Something is not right. Either this username does not exist or it does not exist on 'PC' platfrom.")
-
-#Get fortnite server status
+# Show in-game shop items
 @bot.command()
-async def svr():
-	status_url = "https://fortnite.y3n.co/v2/gamestatus"
-	headers_1 = {'User-Agent': 'nodejs request', 'X-Key': 'API-KEY-GOES-HERE'}
-	response_1 = req.get(status_url, headers = headers_1)
-	data_status = json.loads(response_1.content.decode("utf-8"))
-	status = data_status['status']#Fortnite server status
-	message = data_status['message']#server status message
-	#maintenanceUri = data_status['maintenanceUri']
-	status_str = "Server is " + f"{status}." + "\n" + f"{ message}."
-	await bot.say(status_str)
+async def shp(ctx):
+	items_url = "https://fortnite-public-api.theapinetwork.com/prod09/store/get"
+	items_headers = {'Authorization': '9f3b02bcaa8a878ef1cfe176ed8670b5'}
+	items_data = req.post(
+		items_url, data={'language': 'en'}, headers=items_headers)
+	items_json = json.loads(items_data.content.decode('utf-8'))
+	items = items_json["items"]
+	name_list = []
+	price_list = []
+	image_list = []
+	type_list = []
+	rarity_list = []
+	for item in items:
+		name_list.append(item["name"])
+		price_list.append(item["cost"])
+		image_list.append(item["item"]["image"])
+		type_list.append(item["item"]["type"])
+		rarity_list.append(item["item"]["rarity"])
+	shp_items = ""
+	shp_embed = discord.Embed(
+		title="In-game shop items list (daily updated)\n\n THIS FEATURE IS INCOMPLETE! FOR NOW, IT WILL TAKE SOME TIME TO IMPLEMENT",
+		type="rich",
+		description="Bot developer: AlphaSierra",
+		colour=discord.Colour.gold()
+	)
+	shp_embed.set_author(name=f"Today's shop items are: ",
+                      icon_url="https://i.imgur.com/JijqpW9.jpg")
+	# item 1
+	shp_embed.set_image(url=f"{image_list[0]}")
+	shp_embed.add_field(name=f"Item name:",
+                     value=f"{name_list[0]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item price:",
+                     value=f"{price_list[0]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item rarity:",
+                     value=f"{rarity_list[0]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item type:",
+                     value=f"{type_list[0]}\n\n", inline=False)
 
-#Get todays shop items
-@bot.command()
-async def shp():
-	shop_url = "https://fortnite.y3n.co/v2/shop"
-	headers_2 = {'User-Agent': 'nodejs request', 'X-Key': 'API-KEY-GOES-HERE'}
-	response_2 = req.get(shop_url, headers = headers_2)
-	shop_status = json.loads(response_2.content.decode("utf-8"))
-	#print(list(shop_status.keys()))
-	br_shop = shop_status['br']
-	#print(list(br_shop.keys()))
-	wk_shop = br_shop['weekly']
-	dl_shop = br_shop['daily']
-	wk_item1 = wk_shop[0]
-	wk_item2 = wk_shop[1]
-	dl_item1 = dl_shop[0]
-	dl_item2 = dl_shop[1]
-	dl_item3 = dl_shop[2]
-	dl_item4 = dl_shop[3]
-	dl_item5 = dl_shop[4]
-	dl_item6 = dl_shop[5]
+	# item 2
+	shp_embed.set_image(url=f"{image_list[1]}")
+	shp_embed.add_field(name=f"Item name:",
+                     value=f"{name_list[1]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item price:",
+                     value=f"{price_list[1]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item rarity:",
+                     value=f"{rarity_list[1]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item type:",
+                     value=f"{type_list[1]}\n\n", inline=False)
 
-	#weekly items/images
-	wk_item1_url = wk_item1['imgURL']
-	wk_item2_url = wk_item2['imgURL']
+	# item 3
+	shp_embed.set_image(url=f"{image_list[2]}")
+	shp_embed.add_field(name=f"Item name:",
+                     value=f"{name_list[2]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item price:",
+                     value=f"{price_list[2]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item rarity:",
+                     value=f"{rarity_list[2]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item type:",
+                     value=f"{type_list[2]}\n\n", inline=False)
 
-	#daily items/images
-	dl_item1_url = dl_item1['imgURL']
-	dl_item2_url = dl_item2['imgURL']
-	dl_item3_url = dl_item3['imgURL']
-	dl_item4_url = dl_item4['imgURL']
-	dl_item5_url = dl_item5['imgURL']
-	dl_item6_url = dl_item6['imgURL']
+	# item 4
+	shp_embed.set_image(url=f"{image_list[3]}")
+	shp_embed.add_field(name=f"Item name:",
+                     value=f"{name_list[3]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item price:",
+                     value=f"{price_list[3]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item rarity:",
+                     value=f"{rarity_list[3]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item type:",
+                     value=f"{type_list[3]}\n\n", inline=False)
+	
+	# item 5
+	shp_embed.set_image(url=f"{image_list[4]}")
+	shp_embed.add_field(name=f"Item name:",
+                     value=f"{name_list[4]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item price:",
+                     value=f"{price_list[4]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item rarity:",
+                     value=f"{rarity_list[4]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item type:",
+                     value=f"{type_list[4]}\n\n", inline=False)
 
-	await bot.say("__**Today's shop items are**__")
-	await bot.say(wk_item1_url)
-	await bot.say(wk_item2_url)
-	await bot.say(dl_item1_url)
-	await bot.say(dl_item2_url)
-	await bot.say(dl_item3_url)
-	await bot.say(dl_item4_url)
-	await bot.say(dl_item5_url)
-	await bot.say(dl_item6_url)
+	# item 6
+	shp_embed.set_image(url=f"{image_list[5]}")
+	shp_embed.add_field(name=f"Item name:",
+                     value=f"{name_list[5]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item price:",
+                     value=f"{price_list[5]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item rarity:",
+                     value=f"{rarity_list[5]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item type:",
+                     value=f"{type_list[5]}\n\n", inline=False)
+
+	# item 7
+	shp_embed.set_image(url=f"{image_list[6]}")
+	shp_embed.add_field(name=f"Item name:",
+                     value=f"{name_list[6]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item price:",
+                     value=f"{price_list[6]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item rarity:",
+                     value=f"{rarity_list[6]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item type:",
+                     value=f"{type_list[6]}\n\n", inline=False)
+
+	# item 8
+	shp_embed.set_image(url=f"{image_list[7]}")
+	shp_embed.add_field(name=f"Item name:",
+                     value=f"{name_list[7]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item price:",
+                     value=f"{price_list[7]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item rarity:",
+                     value=f"{rarity_list[7]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item type:",
+                     value=f"{type_list[7]}\n\n", inline=False)
+
+	# item 9
+	shp_embed.set_image(url=f"{image_list[8]}")
+	shp_embed.add_field(name=f"Item name:",
+                     value=f"{name_list[8]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item price:",
+                     value=f"{price_list[8]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item rarity:",
+                     value=f"{rarity_list[8]}\n\n", inline=False)
+	shp_embed.add_field(name=f"Item type:",
+                     value=f"{type_list[8]}\n\n", inline=False)
+
+	await ctx.send(embed=shp_embed)
 
 # Get list of all available weapons in-game
 @bot.command()
-async def wlist():
+async def wlist(ctx):
 	weaponList_url = "http://www.fortnitechests.info/api/weapons"
 	header_weaponList = {'accept': 'application/json'}
-	response_3 = req.get(weaponList_url, headers = header_weaponList)
+	response_3 = req.get(weaponList_url, headers=header_weaponList)
 	weaponList_acquired = json.loads(response_3.content.decode("utf-8"))
 
 	# Get the list of all weapons by using the key 'name'
 	wList = [d['name'] for d in weaponList_acquired if 'name' in d]
-	# Using list(set()) get rid of duplicate entries in our list of weapons
+	# Using list(set()) get rid of duplicate entries in our list
 	wList = list(set(wList))
 
-	# Below code is written on purpose instead of using loops to prevent the bot from sending multiple messages within a short period of time
+	# Below code is written on purpose instead of using loops to prevent the bot from sending too many messages at once
 	wp1 = wList[0]
 	wp2 = wList[1]
 	wp3 = wList[2]
@@ -286,13 +303,25 @@ async def wlist():
 	wp25 = wList[24]
 
 	# Ready for output
-	wList = "**List of all fortnite in-game weapons**" + "\n\n" + wp1 + "\n" + wp2 + "\n" + wp3 + "\n" + wp4 + "\n" + wp5 + "\n" + wp6 + "\n" + wp7 + "\n" + wp8 + "\n" + wp9 + "\n" + wp10 + "\n" + wp11 + "\n" + wp12 + "\n" + wp13 + "\n" + wp14 + "\n" + wp15 + "\n" + wp16 + "\n" + wp17 + "\n" + wp18 + "\n" + wp19 + "\n" + wp20 + "\n" + wp21 + "\n" + wp22 + "\n" + wp23 + "\n" + wp24 + "\n" + wp25 + "\n"
-	wList = "```" + wList + "```"
-	await bot.say(wList)
+	wList = wp1 + "\n" + wp2 + "\n" + wp3 + "\n" + wp4 + "\n" + wp5 + "\n" + wp6 + "\n" + wp7 + "\n" + wp8 + "\n" + wp9 + "\n" + wp10 + "\n" + wp11 + \
+            "\n" + wp12 + "\n" + wp13 + "\n" + wp14 + "\n" + wp15 + "\n" + wp16 + "\n" + wp17 + "\n" + wp18 + \
+            "\n" + wp19 + "\n" + wp20 + "\n" + wp21 + "\n" + \
+            wp22 + "\n" + wp23 + "\n" + wp24 + "\n" + wp25 + "\n"
+	wlist_embed = discord.Embed(
+                    title="Get the list of all available in-game weapons",
+                    type="rich",
+                    description="Weapons List",
+                    colour=discord.Colour.blurple()
+                )
+	wlist_embed.set_author(name=f"Fortnite: Battle Royale",
+                      icon_url="https://i.imgur.com/JijqpW9.jpg")
+	wlist_embed.add_field(name="List:",
+                     value=f"{wList}\n\n", inline=False)
+	await ctx.send(embed=wlist_embed)
 
 # Gets details of weapon by name and rarity
 @bot.command()
-async def wstat(weaponRarity, *, weaponName):
+async def wstat(ctx, weaponRarity, *, weaponName):
 	# API call and raw response
 	weapons_stats = "http://www.fortnitechests.info/api/weapons"
 	header_for_wstats = {'accept': 'application/json'}
@@ -324,69 +353,78 @@ async def wstat(weaponRarity, *, weaponName):
 			wImpact = str(weapon['impact'])
 
 			# Get the output ready to send
-			weaponDetails = "Name: " + wName + "\n" + "Rarity: " + wRarity + "\n" + "Type: " + wType + "\n" + "DPS: " + wDps + "\n" + "Damage: " + wDamage + "\n" + "Headshot Damage: " + wHeadShotDamage + "\n" + "Firerate: " + \
+			wStat = "Name: " + wName + "\n" + "Rarity: " + wRarity + "\n" + "Type: " + wType + "\n" + "DPS: " + wDps + "\n" + "Damage: " + wDamage + "\n" + "Headshot Damage: " + wHeadShotDamage + "\n" + "Firerate: " + \
                             wFireRate + "\n" + "Magsize Size: " + wMagSize + "\n" + "Range: " + wRange + "\n" + "Durability: " + wDurability + \
                             "\n" + "Reload Time: " + wReloadTime + "\n" + "Ammocost: " + \
                             wAmmoCost + "\n" + "Impact: " + wImpact + "\n"
-			await bot.say(weaponDetails)
+			wStat_embed = discord.Embed(
+                                    title="Get weapon specifications",
+                                    type="rich",
+                                    description="Weapons Specs",
+                                    colour=discord.Colour.blurple()
+                                )
+			wStat_embed.set_author(name=f"Fortnite: Battle Royale",
+                        	icon_url="https://i.imgur.com/JijqpW9.jpg")
+			wStat_embed.add_field(name=f"Showing specs of {weaponRarity} {weaponName}:",
+                       		value=f"{wStat}\n\n", inline=False)
+			await ctx.send(embed=wStat_embed)
 		except IndexError:
-			await bot.say("Invalid input!! please check weapon name and rarity combination before you type again" + "\n" + "Use the " + "`.wlist`" + " command for the list of available in-game weapons.")
+			await ctx.send("Invalid input!! please check weapon name and rarity combination before you type again" + "\n" + "Use the " + "`.wlist`" + " command for the list of available in-game weapons.")
 	else:
-		await bot.say("API service unavailable! Please try again later")
+		await ctx.send("API service unavailable! Please try again later")
 
-
+# Movie details
 @bot.command()
-async def mv(*, movieTitle):
-	omdbURL = "http://www.omdbapi.com/?t=" + movieTitle + "&apikey=API_KEY_GOES_HERE"
+async def mv(ctx,*, movieTitle):
+	omdbURL = "http://www.omdbapi.com/?t=" + movieTitle + "&apikey=fe58df64"
 	responseOMDB = req.get(omdbURL)
 	if responseOMDB.status_code == 200:
 		OMDBresult = json.loads(responseOMDB.content.decode("utf-8"))
+		poster_img = OMDBresult["Poster"]
 		responseMovieAvail = OMDBresult.get('Response')
 		if responseMovieAvail == "True":
-			movieList = []
+			movieList = ""
 			for k, v in OMDBresult.items():
-				if k == "Ratings":
+				if k == "Poster":
 					pass
 				else:
-					movieList.append(f"**{k}**" + ":" + f" {v}" + "\n")
-			await bot.say(" ".join(movieList))
+					movieList += f"**{k}**: {v}\n"
+			mv_embed = discord.Embed(
+                                    title="Get movie details",
+                                    type="rich",
+                                    description="Go get your popcorn....",
+                                    colour=discord.Colour.magenta()
+                                )
+			mv_embed.set_image(url=f"{poster_img}")
+			mv_embed.set_author(name=f"Fortknight bot movie manager",
+                            icon_url="https://i.imgur.com/JijqpW9.jpg")
+			mv_embed.add_field(name=f"Showing details for {movieTitle}:",
+                       		value=f"{movieList}\n\n", inline=False)
+			await ctx.send(embed=mv_embed)
 		else:
-			await bot.say("Movie not found! ")
+			await ctx.send("Movie not found! ")
 	else:
-		await bot.say("API service is down! Please try again later...")
+		await ctx.send("API service is down! Please try again later...")
+
+# Help menu
+@bot.command()
+async def ask(ctx):
+	with open("ask.json", 'r') as f:
+		ask_content = json.load(f)
+	ask_help = ""
+	for k, v in ask_content.items():
+		ask_help += f"**{k}**: {v}\n"
+	ask_embed = discord.Embed(
+		title="Help Menu: All usable commands are listed below more are upcoming",
+		type="rich",
+		description="Bot developer: AlphaSierra",
+		colour=discord.Colour.gold()
+	)
+	ask_embed.set_author(name=f"Remember just '.ask' for help",
+                      icon_url="https://i.imgur.com/JijqpW9.jpg")
+	ask_embed.add_field(name="Commands:",
+                     value=f"{ask_help}\n\n", inline=False)
+	await ctx.send(embed=ask_embed)
 
 
-#Help menu
-ft = "`.ft`"
-toss = "`.toss`"
-roll = "`.roll`"
-tweet = "`.tweet`"
-rps = "`.rps`"
-gn = "`.gn`"
-st = "`.st`"
-svr = "`.svr`"
-shp = "`.shp`"
-wlist = "`.wlist`"
-wstat = "`.wstat`"
-mv = "`.mv`"
-help_menu = ft + ":    Random location chooser, gives a randomly choosen location to jump" + "\n\n" + toss + ": Tosses a coin for you" + "\n\n" + roll + ": Rolls a die for you" + "\n\n" + tweet + ": Displays the last three tweets by Fortnite's official handle" + "\n\n" + rps + ": Play Rock, Paper and Scissor" + "\n" + "Usage: " + "`.rps rock`" + "\n\n" + gn + ": Say Good Night to bot" + "\n\n" + st + ": Get player data" + "\n" + "Usage: " + "`.st \"epic username\"`" + "\n\n" + svr + ": Get the Fortnite server status. Whether the servers are UP or DOWN" + \
-    "\n\n" + shp + ": Get today's items from the item shop" + "\n\n" + wlist + ": Get the list of all weapons available to you in-game" + "\n\n" + wstat + ": Get detailed statics of a specified weapon  " + "\n" + "Usage: " + wstat + " \'legendary\'" + " \'scar\'" + "\n\n" + \
-    mv + ": Get details of movie/TV series by typing " + mv + " 'Movie name'" + "\n\n" + \
-   	"Say NO to <:vbuck:431861845318696972> scams! Stay away from scam sites offering free <:vbuck:431861845318696972>" + \
-  		"`Huge improvement underway for this bot. Stay tuned.....`" + "\n\n\n\n"
-
-
-@bot.command(pass_context=True)
-async def ask():
-	await bot.say(help_menu)
-
-
-bot.run("CLIENT_SECRET_GOES_HERE")
-
-
-#Custom emojis:
-#<:vbuck:431861845318696972> Vbuck
-#<:battlestar:431861736597880837> VIP battlestar
-#<:vr:431861842952978452> VictoryRoyale
-
-
+bot.run(TOKEN)
