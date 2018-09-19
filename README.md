@@ -13,8 +13,8 @@
 	* requests
 
 ### Configuration
- The `config.ini` file is where you have to entere all your secret credentials 
- ![`config.ini` file contents](https://i.imgur.com/gHSTUp9.png)
+* The `config.ini` file is where you have to entere all your secret credentials 
+* ![`config.ini` file contents](https://i.imgur.com/gHSTUp9.png)
 
 ### Available commands
 ![Bot commands](https://i.imgur.com/seZdAjW.png)
