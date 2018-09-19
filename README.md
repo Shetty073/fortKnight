@@ -7,7 +7,7 @@
 
 ### Requirements
 * Python 3.6 and above
-* Python libraries required
+* Python modules required
 	* [discord.py rewrite](https://github.com/Rapptz/discord.py/tree/rewrite)
 	* [python-twitter](https://github.com/bear/python-twitter)
 	* [requests](http://docs.python-requests.org/en/master/)
