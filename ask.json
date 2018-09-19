@@ -7,6 +7,10 @@
 	".wlist": "Get list of all available in-game weapons",
 	".wstat": "Get statsheet of a particular weapon. (Usage: .wstat weapon_rarity weapon_name)",
 	".shp": "Get today's in-game shop items",
+	".upshp": "Get upcoming in-game shop items",
+	".news": "Get latest news about Fortnite: Battle Royale",
 	".mv": "Get movie details (Usage: .mv movie_name)",
+	".ch": "Get the current week Battle Royale challenges",
+	".top": "Top 10 Battle Royale players",
 	"NOTE:": "This bot is not yet complete and is under development..."
 }
