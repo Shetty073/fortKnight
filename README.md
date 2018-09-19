@@ -14,7 +14,7 @@
 
 ### Configuration
 ![`config.ini` file contents](https://i.imgur.com/gHSTUp9.png)
-* The `config.ini` file is where you have to entere all your secret credentials 
+* The `config.ini` file is where you have to enter all your secret credentials 
 * All the `ask` (help menu) command string is stored in ask.json - this makes it easy for me to update the `ask` command (help menu)
 
 ### Available commands
