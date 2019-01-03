@@ -23,6 +23,7 @@
 ### Version
 1.1b
 > Cogs implemented
+
 > Code cleaned
 
 ### Future updates
