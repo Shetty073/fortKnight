@@ -14,17 +14,19 @@
 
 ### Configuration
 ![`config.ini` file contents](https://i.imgur.com/gHSTUp9.png)
-* The `config.ini` file is where you have to enter all your secret credentials 
+* The `configs/config.ini` file is where you have to enter all your secret credentials 
 * All the `ask` (help menu) command string is stored in ask.json - this makes it easy for me to update the `ask` command (help menu)
 
 ### Available commands
 ![Bot commands](https://i.imgur.com/seZdAjW.png)
 
 ### Version
-1.0b
+1.1b
+> Cogs implemented
+> Code cleaned
 
 ### Future updates
-Perfromance improvements and maybe cogs implementation
+Perfromance improvements
 
 ### Author(s)
 * Ashish H. Shetty - *initial work* - [AlphaSierra](https://github.com/Shetty073/)
