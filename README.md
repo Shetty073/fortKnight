@@ -1,6 +1,6 @@
 # FortKnight 
 #### A discord.py bot for fortnite players on Discord
-#### This is the new and complete rewrite of the original bot with alternate API source. This bot was originally intended for our discord server where me and my fortnite-loving friends have fun. I open-sourced it to share it others.
+#### This is the new and complete rewrite of the original bot with alternate API source. This bot was originally intended for our discord server where me and my fortnite-loving friends have fun. I am sharing the source code for others to deploy or use on their servers.
 
 ## Getting started
 #### These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
