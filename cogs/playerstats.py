@@ -2,15 +2,9 @@ import discord
 from discord.ext import commands
 import requests as req
 import json
-import configparser
-
-# Get the token from configuration file
-config = configparser.ConfigParser()
-config.read("config/config.ini")
-API_KEY = config["FORTNITE"]["st_key"]
 
 
-class PlayerStats:
+class PlayerStats(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -19,8 +13,7 @@ class PlayerStats:
     async def st(self, ctx, *, epic_name):  # *arg captures everything after other specified args as a list *, arg captures it, and converts it to one string
         try:
             st_url = "https://fortnite-public-api.theapinetwork.com/prod09/users/id"
-            st_headers = {'Authorization': API_KEY}
-            st_data = req.post(st_url, data={'username': epic_name}, headers=st_headers)
+            st_data = req.post(st_url, data={'username': epic_name})
             st_json = json.loads(st_data.content.decode("utf-8"))
         except Exception as e:
             async with ctx.channel.typing():
@@ -28,9 +21,8 @@ class PlayerStats:
             # Get stats
         try:
             s_url = "https://fortnite-public-api.theapinetwork.com/prod09/users/public/br_stats"
-            s_headers = {'Authorization': API_KEY}
             s_data = req.post(s_url, data={
-                        'user_id': st_json["uid"], 'platform': 'pc', 'window': "alltime"}, headers=s_headers)
+                        'user_id': st_json["uid"], 'platform': 'pc', 'window': "alltime"})
             s_json = json.loads(s_data.content.decode("utf-8"))
         except Exception as e:
             async with ctx.channel.typing():

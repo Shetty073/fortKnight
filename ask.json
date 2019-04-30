@@ -11,6 +11,5 @@
 	".news": "Get latest news about Fortnite: Battle Royale",
 	".mv": "Get movie details (Usage: .mv movie_name)",
 	".ch": "Get the current week Battle Royale challenges",
-	".top": "Top 10 Battle Royale players",
 	"NOTE:": "This bot is not yet complete and is under development..."
 }

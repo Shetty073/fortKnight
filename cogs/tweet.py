@@ -12,7 +12,7 @@ ACCESS_TOKEN_KEY = config["TWITTER"]["access_token_key"]
 ACCESS_TOKEN_SECRET = config["TWITTER"]["access_token_secret"]
 
 
-class TweetCog:
+class TweetCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 

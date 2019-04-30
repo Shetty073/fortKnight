@@ -2,15 +2,9 @@ import discord
 from discord.ext import commands
 import requests as req
 import json
-import configparser
-
-# Get the token from configuration file
-config = configparser.ConfigParser()
-config.read("config/config.ini")
-API_KEY = config["FORTNITE"]["st_key"]
 
 
-class UpShopCog:
+class UpShopCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -18,9 +12,8 @@ class UpShopCog:
     @commands.command()
     async def upshp(self, ctx):
         up_items_url = "https://fortnite-public-api.theapinetwork.com/prod09/upcoming/get"
-        up_items_headers = {'Authorization': API_KEY}
         up_items_data = req.post(
-            up_items_url, data={'language': 'en'}, headers=up_items_headers)
+            up_items_url, data={'language': 'en'})
         up_items_json = json.loads(up_items_data.content.decode('utf-8'))
         up_items = up_items_json["items"]
         up_name_list = []

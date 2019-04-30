@@ -2,7 +2,7 @@ from discord.ext import commands
 from random import choice
 
 
-class PlacesCog:
+class PlacesCog(commands.Cog):
 	def __init__(self, bot):
 		self.bot = bot
 

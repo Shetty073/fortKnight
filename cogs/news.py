@@ -2,15 +2,9 @@ import discord
 from discord.ext import commands
 import requests as req
 import json
-import configparser
-
-# Get the token from configuration file
-config = configparser.ConfigParser()
-config.read("config/config.ini")
-API_KEY = config["FORTNITE"]["st_key"]
 
 
-class NewsCog:
+class NewsCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -18,9 +12,8 @@ class NewsCog:
     @commands.command()
     async def news(self, ctx):
         news_url = "https://fortnite-public-api.theapinetwork.com/prod09/br_motd/get"
-        news_headers = {'Authorization': API_KEY}
         news_data = req.post(
-            news_url, data={'language': 'en'}, headers=news_headers)
+            news_url, data={'language': 'en'})
         news_json = json.loads(news_data.content.decode('utf-8'))
         news_entries = news_json['entries']
         for entry in news_entries:

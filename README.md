@@ -13,7 +13,7 @@
 	* [requests](http://docs.python-requests.org/en/master/)
 
 ### Configuration
-![`config.ini` file contents](https://i.imgur.com/gHSTUp9.png)
+![`config.ini` file contents](https://i.imgur.com/ufQxHuN.png)
 * The `configs/config.ini` file is where you have to enter all your secret credentials 
 * All the `ask` (help menu) command string is stored in ask.json - this makes it easy for me to update the `ask` command (help menu)
 
@@ -21,10 +21,9 @@
 ![Bot commands](https://i.imgur.com/seZdAjW.png)
 
 ### Version
-1.1b
-> Cogs implemented
-
+1.2
 > Code cleaned
+> Changes made to support latest (as of April 2019) dicord.py
 
 ### Future updates
 Perfromance improvements

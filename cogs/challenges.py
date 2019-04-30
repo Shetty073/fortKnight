@@ -2,26 +2,17 @@ import discord
 from discord.ext import commands
 import requests as req
 import json
-import configparser
-
-# Get the token from configuration file
-config = configparser.ConfigParser()
-config.read("config/config.ini")
-API_KEY = config["FORTNITE"]["st_key"]
 
 
-class ChallengesCog:
+class ChallengesCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     # Get the current week challenges
     @commands.command()
     async def ch(self, ctx):
-        challenges_url = "https://fortnite-public-api.theapinetwork.com/prod09/challenges/get"
-        challenges_headers = {
-            'Authorization': API_KEY, 'X-Fortnite-API-Version': 'v1.1'}
-        challenges_data = req.post(
-            challenges_url, data={'season': 'current', 'language': 'en'}, headers=challenges_headers)
+        challenges_url = "https://fortnite-public-api.theapinetwork.com/prod09/challenges/get?season=current"
+        challenges_data = req.post(challenges_url)
         challenges_json = json.loads(challenges_data.content.decode('utf-8'))
         challenges_desc_list = []
         challenges_total_list = []

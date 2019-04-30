@@ -5,7 +5,7 @@ import json
 
 
 # Gets details of weapon by name and rarity
-class WlistCog:
+class WlistCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 

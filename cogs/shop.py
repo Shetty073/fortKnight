@@ -2,15 +2,9 @@ import discord
 from discord.ext import commands
 import requests as req
 import json
-import configparser
-
-# Get the token from configuration file
-config = configparser.ConfigParser()
-config.read("config/config.ini")
-API_KEY = config["FORTNITE"]["st_key"]
 
 
-class ShopCog:
+class ShopCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -18,9 +12,7 @@ class ShopCog:
     @commands.command()
     async def shp(self, ctx):
         items_url = "https://fortnite-public-api.theapinetwork.com/prod09/store/get"
-        items_headers = {'Authorization': API_KEY}
-        items_data = req.post(
-            items_url, data={'language': 'en'}, headers=items_headers)
+        items_data = req.post(items_url, data={'language': 'en'})
         items_json = json.loads(items_data.content.decode('utf-8'))
         items = items_json["items"]
         name_list = []

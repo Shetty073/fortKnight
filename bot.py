@@ -17,11 +17,6 @@ logger.addHandler(handler)
 config = configparser.ConfigParser()
 config.read("config/config.ini")
 TOKEN = config["BOT"]["token"]
-CONSUMER_KEY = config["TWITTER"]["consumer_key"]
-CONSUMER_SECRET = config["TWITTER"]["consumer_secret"]
-ACCESS_TOKEN_KEY = config["TWITTER"]["access_token_key"]
-ACCESS_TOKEN_SECRET = config["TWITTER"]["access_token_secret"]
-API_KEY = config["FORTNITE"]["st_key"]
 
 # Bot code begins
 bot = commands.Bot(command_prefix='.', description="just `.ask` for help", case_insensitive=True)
@@ -75,7 +70,6 @@ extensions = ["cogs.wstat",
 			  "cogs.news",
 			  "cogs.playerstats",
 			  "cogs.tweet",
-			  "cogs.topplayers",
 			  "cogs.challenges",
 			  "cogs.shop",
 			  "cogs.upshop",

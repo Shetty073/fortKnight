@@ -4,7 +4,7 @@ import requests as req
 import json
 
 
-class MovieCog:
+class MovieCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
