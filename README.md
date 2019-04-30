@@ -19,6 +19,7 @@
 
 ### Available commands
 ![Bot commands](https://i.imgur.com/seZdAjW.png)
+* .top command has been removed
 
 ### Version
 1.2
