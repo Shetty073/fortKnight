@@ -35,7 +35,7 @@ class ShopCog(commands.Cog):
                 colour=discord.Colour.purple()
             )
             shp_embed.set_author(name="Fortnite: Battle Royale in-game shop item:",
-                            icon_url="https://i.imgur.com/JijqpW9.jpg")
+                                 icon_url="https://i.imgur.com/JijqpW9.jpg")
             shp_embed.set_image(url=f"{k}")
             shp_embed.add_field(name="Price:", value=f"{v}", inline=False)
             async with ctx.channel.typing():

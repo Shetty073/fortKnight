@@ -19,11 +19,12 @@ class WstatCog(commands.Cog):
         if response_4.status_code == 200:
             wstats_acquired = json.loads(response_4.content.decode("utf-8"))
             try:
-                    # Processing response for individual data
+                # Processing response for individual data
                 weaponname = weaponname.title()
                 weaponrarity = weaponrarity.lower()
                 weapon = list(filter(
-                    lambda weapon: weapon['name'] == f'{weaponname}' and weapon['rarity'] == f'{weaponrarity}', wstats_acquired))
+                    lambda weapon: weapon['name'] == f'{weaponname}' and weapon['rarity'] == f'{weaponrarity}',
+                    wstats_acquired))
                 weapon = weapon[0]
 
                 # Get individual data by 'keys'
@@ -42,25 +43,29 @@ class WstatCog(commands.Cog):
                 wImpact = str(weapon['impact'])
 
                 # Get the output ready to send
-                wStat = "**Name: **" + wName + "\n" + "**Rarity: **" + wRarity + "\n" + "**Type: **" + wType + "\n" + "**DPS: **" + wDps + "\n" + "**Damage: **" + wDamage + "\n" + "**Headshot Damage: **" + wHeadShotDamage + "\n" + "**Firerate: **" + \
-                                wFireRate + "\n" + "**Magsize Size: **" + wMagSize + "\n" + "**Range: **" + wRange + "\n" + "**Durability: **" + wDurability + \
-                                "\n" + "**Reload Time: **" + wReloadTime + "\n" + "**Ammocost: **" + \
-                                wAmmoCost + "\n" + "**Impact: **" + wImpact + "\n"
+                wStat = "**Name: **" + wName + "\n" + "**Rarity: **" + wRarity + "\n" + "**Type: **" + wType + "\n" + \
+                        "**DPS: **" + wDps + "\n" + "**Damage: **" + wDamage + "\n" + "**Headshot Damage: **" + \
+                        wHeadShotDamage + "\n" + "**Firerate: **" + wFireRate + "\n" + "**Magsize Size: **" + wMagSize \
+                        + "\n" + "**Range: **" + wRange + "\n" + "**Durability: **" + wDurability + "\n" + \
+                        "**Reload Time: **" + wReloadTime + "\n" + "**Ammocost: **" + wAmmoCost + "\n" + \
+                        "**Impact: **" + wImpact + "\n"
                 wStat_embed = discord.Embed(
-                                        title="Get weapon specifications",
-                                        type="rich",
-                                        description="Weapons Specs",
-                                        colour=discord.Colour.blurple()
-                                    )
+                    title="Get weapon specifications",
+                    type="rich",
+                    description="Weapons Specs",
+                    colour=discord.Colour.blurple()
+                )
                 wStat_embed.set_author(name=f"Fortnite: Battle Royale",
-                                icon_url="https://i.imgur.com/JijqpW9.jpg")
+                                       icon_url="https://i.imgur.com/JijqpW9.jpg")
                 wStat_embed.add_field(name=f"Showing specs of {weaponrarity} {weaponname}:",
-                                value=f"{wStat}\n\n", inline=False)
+                                      value=f"{wStat}\n\n", inline=False)
                 async with ctx.channel.typing():
                     await ctx.send(embed=wStat_embed)
             except IndexError:
                 async with ctx.channel.typing():
-                    await ctx.send("Invalid input!! please check weapon name and rarity combination before you type again" + "\n" + "Use the " + "`.wlist`" + " command for the list of available in-game weapons.")
+                    await ctx.send(
+                        "Invalid input!! please check weapon name and rarity combination before you type again" + "\n"
+                        + "Use the " + "`.wlist`" + " command for the list of available in-game weapons.")
         else:
             async with ctx.channel.typing():
                 await ctx.send("API service unavailable! Please try again later")

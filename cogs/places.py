@@ -10,11 +10,13 @@ class PlacesCog(commands.Cog):
 	@commands.command()
 	async def ft(self, ctx):
 		places = ["Haunted Hills", "Junk Junction", "Loot Lake", "Pleasant Park",
-				  "Snobby Shores", "Tilted Towers", "Happy Hamlet", "Polar Peak",
+				  "Snobby Shores", "Neo Tilted", "Happy Hamlet", "Polar Peak",
 				  "Frosty Flights", "Lucky Landing", "Shifty Shafts", "Fatal Fields",
-				  "Paradise Palms", "Retail Row", "Salty Springs", "Dusty Divot",
-				  "Lazy Links", "Lonely Lodge", "The Block", "Tomato Temple",
-				  "Wailing Woods", "anywhere you want", "the three ski lodges"]
+				  "Paradise Palms", "Mega Mall", "Salty Springs", "Dusty Divot",
+				  "Lazy Lagoon", "Lonely Lodge", "The Block", "Lava Tomato Temple",
+				  "Sunny Steps", "anywhere you want", "the three ski lodges", 
+				  "Old Factories", "Viking Village", "Hero House", "Villain House",
+				  "Football Stadium", "Mexico"]
 		place = choice(places)
 		if place == "anywhere you want":
 			async with ctx.channel.typing():

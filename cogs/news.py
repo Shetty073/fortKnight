@@ -27,7 +27,7 @@ class NewsCog(commands.Cog):
                 colour=discord.Colour.purple()
             )
             news_embed.set_author(name="Latest Battle Royale news: ",
-                            icon_url="https://i.imgur.com/JijqpW9.jpg")
+                                  icon_url="https://i.imgur.com/JijqpW9.jpg")
             news_embed.set_image(url=news_image)
             news_embed.add_field(name=news_title, value=news_body, inline=False)
             async with ctx.channel.typing():

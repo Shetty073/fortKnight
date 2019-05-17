@@ -51,9 +51,9 @@ class WlistCog(commands.Cog):
 
         # Ready for output
         w_list = wp1 + "\n" + wp2 + "\n" + wp3 + "\n" + wp4 + "\n" + wp5 + "\n" + wp6 + "\n" + wp7 + "\n" + wp8 + "\n" + wp9 + "\n" + wp10 + "\n" + wp11 + \
-                "\n" + wp12 + "\n" + wp13 + "\n" + wp14 + "\n" + wp15 + "\n" + wp16 + "\n" + wp17 + "\n" + wp18 + \
-                "\n" + wp19 + "\n" + wp20 + "\n" + wp21 + "\n" + \
-                wp22 + "\n" + wp23 + "\n" + wp24 + "\n" + wp25 + "\n"
+                 "\n" + wp12 + "\n" + wp13 + "\n" + wp14 + "\n" + wp15 + "\n" + wp16 + "\n" + wp17 + "\n" + wp18 + \
+                 "\n" + wp19 + "\n" + wp20 + "\n" + wp21 + "\n" + \
+                 wp22 + "\n" + wp23 + "\n" + wp24 + "\n" + wp25 + "\n"
         wlist_embed = discord.Embed(
             title="Get the list of all available in-game weapons",
             type="rich",
